@@ -1,15 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:flower_e_commerce_app/Feature/auth/api/model/requests/sign_in_request_dto.dart';
-import 'package:flower_e_commerce_app/Feature/auth/api/model/responses/sign_in_response_dto.dart';
-
+import 'package:flower_e_commerce_app/Feature/auth/api/models/request/sign_in_request_dto.dart';
+import 'package:flower_e_commerce_app/Feature/auth/api/models/request/sign_up_request_model.dart';
+import 'package:flower_e_commerce_app/Feature/auth/api/models/response/logout_response_dto.dart';
+import 'package:flower_e_commerce_app/Feature/auth/api/models/response/sign_in_response_dto.dart';
 import 'package:flower_e_commerce_app/Feature/auth/api/models/response/sign_up_response_dto.dart';
-import 'package:flower_e_commerce_app/Feature/auth/api/models/sign_up_request_model.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/api_constants.dart';
-
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-import '../../../../core/utils/Constantts/api_constants.dart';
 import '../models/request/forget_password_request.dart';
 import '../models/request/reset_password_request.dart';
 import '../models/request/verify_reset_code_request.dart';
@@ -41,4 +39,7 @@ abstract class ApiServices {
 
   @POST(ApiConstants.signUp)
   Future<SignUpResponseDto> signUp(@Body() SignUpRequestModel signUpRequest);
+
+  @GET(ApiConstants.logout)
+  Future<LogoutResponseDto> logout();
 }

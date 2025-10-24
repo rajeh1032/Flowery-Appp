@@ -1,4 +1,4 @@
-import 'package:flower_e_commerce_app/Feature/auth/domain/use_cases/sign_in_use_case.dart';
+import 'package:flower_e_commerce_app/Feature/auth/domain/useCases/sign_in_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

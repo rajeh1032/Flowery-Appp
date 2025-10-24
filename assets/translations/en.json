@@ -31,10 +31,10 @@
   "out_stock": "Status: Out Stock",
   "status": "Status",
   "description": "Description",
-  "items" : "items",
-  "currency" : "EGP",
-  "empty_cart" : "Opps Your Cart Is Empty",
-  "remove_all_cart_items" : "Remove all cart items",
+  "items": "items",
+  "currency": "EGP",
+  "empty_cart": "Opps Your Cart Is Empty",
+  "remove_all_cart_items": "Remove all cart items",
   "otpSentSuccess": "Code sent! Check your email.",
   "passwordResetSuccess": "Password changed successfully.",
   "codeVerifiedSuccess": "Code verified!",
@@ -218,10 +218,8 @@
   "please_select_address": "Please select an address",
   "no_address_selected": "No address selected",
   "success": "Success",
-  "order_success_message": "Your order placed successfully!"
-
+  "order_success_message": "Your order placed successfully!",
+  "confirm_logout": "Are you sure you want to logout?",
+  "cancel": "Cancel",
+  "logout_successfully": "Logged out successfully"
 }
-
-
-
-

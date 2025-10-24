@@ -7,6 +7,7 @@ abstract class ApiConstants {
   static const String bearer = 'Bearer';
   static const String authorization = 'Authorization';
   static const String editProfile = 'auth/editProfile';
+  static const String logout = 'auth/logout';
   static const String getLoggedUserData = 'auth/profile-data';
   static const String uploadPhoto = '/auth/upload-photo';
   static const String occasions = 'occasions';

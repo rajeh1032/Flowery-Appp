@@ -1,8 +1,8 @@
 import 'package:flower_e_commerce_app/Feature/auth/domain/entities/requestEntities/sign_up_request_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entities/resposneEntities/sign_up_response_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/useCases/sign_up_use_case.dart';
-import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/events/sign_up_event.dart';
-import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/states/sign_Up_state.dart';
+import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/signUp/sign_up_event.dart';
+import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/signUp/sign_Up_state.dart';
 import 'package:flower_e_commerce_app/core/Errors/api_results.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/app_constants.dart';
 import 'package:flutter/widgets.dart';

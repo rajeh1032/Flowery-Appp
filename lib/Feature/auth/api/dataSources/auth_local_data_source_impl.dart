@@ -41,4 +41,9 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     final String value = await _storage.read(key: AppConstants.rememberMe);
     return value.toLowerCase() == 'true';
   }
+
+  @override
+  Future<void> deleteToken() async {
+    await _storage.delete(key: AppConstants.token);
+  }
 }

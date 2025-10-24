@@ -72,7 +72,9 @@ class _SigninScreenState extends State<SigninScreen> {
                               Checkbox(
                                 value: _viewModel.rememberMe,
                                 onChanged: (val) {
-                                  _viewModel.rememberMe = val ?? false;
+                                  setState(() {
+                                    _viewModel.rememberMe = val ?? false;
+                                  });
                                 },
                               ),
                               Text(LocaleKeys.remember_me.tr()),

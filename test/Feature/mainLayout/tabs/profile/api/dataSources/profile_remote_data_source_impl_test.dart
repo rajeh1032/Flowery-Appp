@@ -15,7 +15,7 @@ import 'package:flower_e_commerce_app/core/Errors/failure.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:flower_e_commerce_app/Feature/auth/api/model/responses/user_response_dto.dart';
+import 'package:flower_e_commerce_app/Feature/auth/api/models/response/user_response_dto.dart';
 
 import 'profile_remote_data_source_impl_test.mocks.dart';
 

@@ -1,4 +1,5 @@
 import 'package:flower_e_commerce_app/Feature/auth/domain/entities/requestEntities/sign_up_request_entity.dart';
+import 'package:flower_e_commerce_app/Feature/auth/domain/entities/response/logout_response_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entities/resposneEntities/sign_up_response_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entity/response/sign_in_response_entity.dart';
 import 'package:flower_e_commerce_app/core/Errors/api_results.dart';
@@ -28,4 +29,6 @@ abstract interface class AuthRemoteDataSource {
 
   Future<ApiResult<SignUpResponseEntity>> signup(
       SignUpRequestEntity signUpRequestEntity);
+
+  Future<ApiResult<LogoutResponseEntity>> logout();
 }

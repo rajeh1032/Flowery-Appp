@@ -1,4 +1,4 @@
-import 'package:flower_e_commerce_app/Feature/auth/api/model/requests/sign_in_request_dto.dart';
+import 'package:flower_e_commerce_app/Feature/auth/api/models/request/sign_in_request_dto.dart';
 
 class SigninRequestEntity {
   final String email;

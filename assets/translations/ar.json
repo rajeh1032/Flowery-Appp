@@ -40,12 +40,12 @@
   "all_prices_include_tax": "السعر يشمل الضريبة",
   "Do_not_have_an_account": "ليس لديك حساب؟ سجل الآن",
   "Sign_up": "سجل",
-  "items" : "العناصر",
-  "empty_cart" : "السلة الخاصة بك فارغة",
-  "sub_total" : "المجموع الفرعى",
-  "delivery_fee" : "خدمة النوصيل",
-  "total" : "المجموع",
-  "remove_all_cart_items" : "ازالة جميع العناصر من السلة",
+  "items": "العناصر",
+  "empty_cart": "السلة الخاصة بك فارغة",
+  "sub_total": "المجموع الفرعى",
+  "delivery_fee": "خدمة النوصيل",
+  "total": "المجموع",
+  "remove_all_cart_items": "ازالة جميع العناصر من السلة",
   "location_service_disabled": "من فضلك فعّل خدمة الموقع (GPS)",
   "location_permission_denied": "تم رفض إذن الموقع",
   "location_permission_denied_forever": "تم رفض إذن الموقع نهائياً",
@@ -217,7 +217,8 @@
   "unableToLoadPaymentPage": "تعذر تحميل صفحة الدفع.",
   "please_select_address": "من فضلك اختر عنوانًا",
   "no_address_selected": "لم يتم اختيار عنوان",
-  "order_success_message": "تم وضع طلبك بنجاح!"
-
+  "order_success_message": "تم وضع طلبك بنجاح!",
+  "confirm_logout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "cancel": "إلغاء",
+  "logout_successfully": "تم تسجيل الخروج بنجاح"
 }
-

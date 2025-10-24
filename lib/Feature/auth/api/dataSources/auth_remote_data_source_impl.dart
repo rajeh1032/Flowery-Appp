@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flower_e_commerce_app/Feature/auth/api/client/api_service.dart';
-
 import 'package:flower_e_commerce_app/Feature/auth/api/mapper/forget_password_dto_mapper.dart';
 import 'package:flower_e_commerce_app/Feature/auth/api/mapper/reset_password_dto_mapper.dart';
 import 'package:flower_e_commerce_app/Feature/auth/api/mapper/verify_reset_code_dto_mapper.dart';
+import 'package:flower_e_commerce_app/Feature/auth/api/models/request/sign_up_request_model.dart';
+import 'package:flower_e_commerce_app/Feature/auth/data/dataSources/auth_local_data_source.dart';
 import 'package:flower_e_commerce_app/Feature/auth/data/dataSources/auth_remote_data_source.dart';
+import 'package:flower_e_commerce_app/Feature/auth/domain/entities/response/logout_response_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entity/response/sign_in_response_entity.dart';
-
 import 'package:flower_e_commerce_app/Feature/auth/api/mapper/sign_up_response_dto_mapper.dart';
-import 'package:flower_e_commerce_app/Feature/auth/api/models/sign_up_request_model.dart';
+import 'package:flower_e_commerce_app/Feature/auth/api/mapper/logout_dto_mapper.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entities/requestEntities/sign_up_request_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entities/resposneEntities/sign_up_response_entity.dart';
-
 import 'package:flower_e_commerce_app/core/Errors/api_results.dart';
 import 'package:flower_e_commerce_app/core/Errors/failure.dart';
 import 'package:injectable/injectable.dart';
@@ -24,15 +24,16 @@ import '../../domain/entities/response/verify_reset_code_response_entity.dart';
 import '../models/request/forget_password_request.dart';
 import '../models/request/reset_password_request.dart';
 import '../models/request/verify_reset_code_request.dart';
-
 import '../../domain/entity/request/sign_in_request_entity.dart';
 
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final ApiServices _apiServices;
-
-  AuthRemoteDataSourceImpl(this._apiServices);
-
+  final AuthLocalDataSource _authLocalDataSource;
+  AuthRemoteDataSourceImpl(
+    this._apiServices,
+    this._authLocalDataSource,
+  );
   @override
   Future<ApiResult<SigninResponseEntity>> signin(
       {required SigninRequestEntity request}) async {
@@ -124,6 +125,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return ApiErrorResult<SignUpResponseEntity>(failure: failure);
     } catch (e) {
       return ApiErrorResult<SignUpResponseEntity>(
+          failure: ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<ApiResult<LogoutResponseEntity>> logout() async {
+    try {
+      var response = await _apiServices.logout();
+      await _authLocalDataSource.deleteToken();
+      return ApiSuccessResult<LogoutResponseEntity>(data: response.toEntity());
+    } on DioException catch (dioError) {
+      final failure = ServerFailure.fromDioError(dioException: dioError);
+      return ApiErrorResult<LogoutResponseEntity>(failure: failure);
+    } catch (e) {
+      return ApiErrorResult<LogoutResponseEntity>(
           failure: ServerFailure(errorMessage: e.toString()));
     }
   }
