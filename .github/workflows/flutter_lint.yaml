@@ -13,6 +13,11 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
       # Delete pubspec.lock if exists on it
+      - name: Create .env file with secrets
+        run: |
+          echo "GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}" >> .env
+          echo ".env file created successfully"
+
       - name: Delete pubspec.lock
         run: |
           if [ -f pubspec.lock ]; then

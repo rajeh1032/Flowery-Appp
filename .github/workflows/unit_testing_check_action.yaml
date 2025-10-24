@@ -9,7 +9,11 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
-     
+      - name: Create .env file with secrets
+        run: |
+          echo "GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}" >> .env
+          echo ".env file created successfully"
+
       - name: Delete pubspec.lock
         run: |
           if [ -f pubspec.lock ]; then
@@ -28,7 +32,7 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-    
+
       - name: Generate code (json_serializable, retrofit, mockito)
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
