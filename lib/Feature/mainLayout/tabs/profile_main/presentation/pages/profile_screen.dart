@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/logout/logout_view_model.dart';
+import 'package:flower_e_commerce_app/Feature/auth/presentation/widgets/logout/logout_alert_dialogue.dart';
 import 'package:flower_e_commerce_app/core/Config/Theme/app_colors.dart';
 import 'package:flower_e_commerce_app/core/Di/di.dart';
 import 'package:flower_e_commerce_app/core/helpers/routing_extensions.dart';
@@ -174,10 +176,30 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildLogout() {
-    return ProfileMenuItem(
-      leadingIcon: Icon(Icons.logout, size: AppSizes.smIcon_16),
-      title: LocaleKeys.logout.tr(),
-      trailing: Icon(Icons.logout),
+    return BlocProvider(
+      create: (context) => getIt<LogoutViewModel>(),
+      child: Builder(
+        builder: (context) {
+          return GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return BlocProvider.value(
+                    value: context.read<LogoutViewModel>(),
+                    child: const LogoutAlertDialogue(),
+                  );
+                },
+              );
+            },
+            child: ProfileMenuItem(
+              leadingIcon: Icon(Icons.logout, size: AppSizes.smIcon_16),
+              title: LocaleKeys.logout.tr(),
+              trailing: Icon(Icons.logout),
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -3,30 +3,32 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i8;
+import 'dart:async' as _i9;
 
 import 'package:flower_e_commerce_app/Feature/auth/api/client/api_service.dart'
-    as _i7;
-import 'package:flower_e_commerce_app/Feature/auth/api/model/requests/sign_in_request_dto.dart'
-    as _i9;
-import 'package:flower_e_commerce_app/Feature/auth/api/model/responses/sign_in_response_dto.dart'
-    as _i2;
+    as _i8;
 import 'package:flower_e_commerce_app/Feature/auth/api/models/request/forget_password_request.dart'
-    as _i10;
-import 'package:flower_e_commerce_app/Feature/auth/api/models/request/reset_password_request.dart'
-    as _i12;
-import 'package:flower_e_commerce_app/Feature/auth/api/models/request/verify_reset_code_request.dart'
     as _i11;
+import 'package:flower_e_commerce_app/Feature/auth/api/models/request/reset_password_request.dart'
+    as _i13;
+import 'package:flower_e_commerce_app/Feature/auth/api/models/request/sign_in_request_dto.dart'
+    as _i10;
+import 'package:flower_e_commerce_app/Feature/auth/api/models/request/sign_up_request_model.dart'
+    as _i14;
+import 'package:flower_e_commerce_app/Feature/auth/api/models/request/verify_reset_code_request.dart'
+    as _i12;
 import 'package:flower_e_commerce_app/Feature/auth/api/models/response/forget_password_response_dto.dart'
     as _i3;
+import 'package:flower_e_commerce_app/Feature/auth/api/models/response/logout_response_dto.dart'
+    as _i7;
 import 'package:flower_e_commerce_app/Feature/auth/api/models/response/reset_password_response_dto.dart'
     as _i5;
+import 'package:flower_e_commerce_app/Feature/auth/api/models/response/sign_in_response_dto.dart'
+    as _i2;
 import 'package:flower_e_commerce_app/Feature/auth/api/models/response/sign_up_response_dto.dart'
     as _i6;
 import 'package:flower_e_commerce_app/Feature/auth/api/models/response/verify_reset_code_response_dto.dart'
     as _i4;
-import 'package:flower_e_commerce_app/Feature/auth/api/models/sign_up_request_model.dart'
-    as _i13;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -98,17 +100,28 @@ class _FakeSignUpResponseDto_4 extends _i1.SmartFake
         );
 }
 
+class _FakeLogoutResponseDto_5 extends _i1.SmartFake
+    implements _i7.LogoutResponseDto {
+  _FakeLogoutResponseDto_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [ApiServices].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiServices extends _i1.Mock implements _i7.ApiServices {
+class MockApiServices extends _i1.Mock implements _i8.ApiServices {
   MockApiServices() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Future<_i2.SigninResponseDto> signIn(
-          {required _i9.SigninRequestDto? request}) =>
+  _i9.Future<_i2.SigninResponseDto> signIn(
+          {required _i10.SigninRequestDto? request}) =>
       (super.noSuchMethod(
         Invocation.method(
           #signIn,
@@ -116,7 +129,7 @@ class MockApiServices extends _i1.Mock implements _i7.ApiServices {
           {#request: request},
         ),
         returnValue:
-            _i8.Future<_i2.SigninResponseDto>.value(_FakeSigninResponseDto_0(
+            _i9.Future<_i2.SigninResponseDto>.value(_FakeSigninResponseDto_0(
           this,
           Invocation.method(
             #signIn,
@@ -124,17 +137,17 @@ class MockApiServices extends _i1.Mock implements _i7.ApiServices {
             {#request: request},
           ),
         )),
-      ) as _i8.Future<_i2.SigninResponseDto>);
+      ) as _i9.Future<_i2.SigninResponseDto>);
 
   @override
-  _i8.Future<_i3.ForgetPasswordResponseDto> forgetPassword(
-          _i10.ForgetPasswordRequest? forgetPasswordRequest) =>
+  _i9.Future<_i3.ForgetPasswordResponseDto> forgetPassword(
+          _i11.ForgetPasswordRequest? forgetPasswordRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #forgetPassword,
           [forgetPasswordRequest],
         ),
-        returnValue: _i8.Future<_i3.ForgetPasswordResponseDto>.value(
+        returnValue: _i9.Future<_i3.ForgetPasswordResponseDto>.value(
             _FakeForgetPasswordResponseDto_1(
           this,
           Invocation.method(
@@ -142,17 +155,17 @@ class MockApiServices extends _i1.Mock implements _i7.ApiServices {
             [forgetPasswordRequest],
           ),
         )),
-      ) as _i8.Future<_i3.ForgetPasswordResponseDto>);
+      ) as _i9.Future<_i3.ForgetPasswordResponseDto>);
 
   @override
-  _i8.Future<_i4.VerifyResetCodeResponseDto> verifyResetCode(
-          _i11.VerifyResetCodeRequest? verifyResetCodeRequest) =>
+  _i9.Future<_i4.VerifyResetCodeResponseDto> verifyResetCode(
+          _i12.VerifyResetCodeRequest? verifyResetCodeRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #verifyResetCode,
           [verifyResetCodeRequest],
         ),
-        returnValue: _i8.Future<_i4.VerifyResetCodeResponseDto>.value(
+        returnValue: _i9.Future<_i4.VerifyResetCodeResponseDto>.value(
             _FakeVerifyResetCodeResponseDto_2(
           this,
           Invocation.method(
@@ -160,17 +173,17 @@ class MockApiServices extends _i1.Mock implements _i7.ApiServices {
             [verifyResetCodeRequest],
           ),
         )),
-      ) as _i8.Future<_i4.VerifyResetCodeResponseDto>);
+      ) as _i9.Future<_i4.VerifyResetCodeResponseDto>);
 
   @override
-  _i8.Future<_i5.ResetPasswordResponseDto> resetPassword(
-          _i12.ResetPasswordRequest? resetPasswordRequest) =>
+  _i9.Future<_i5.ResetPasswordResponseDto> resetPassword(
+          _i13.ResetPasswordRequest? resetPasswordRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #resetPassword,
           [resetPasswordRequest],
         ),
-        returnValue: _i8.Future<_i5.ResetPasswordResponseDto>.value(
+        returnValue: _i9.Future<_i5.ResetPasswordResponseDto>.value(
             _FakeResetPasswordResponseDto_3(
           this,
           Invocation.method(
@@ -178,23 +191,39 @@ class MockApiServices extends _i1.Mock implements _i7.ApiServices {
             [resetPasswordRequest],
           ),
         )),
-      ) as _i8.Future<_i5.ResetPasswordResponseDto>);
+      ) as _i9.Future<_i5.ResetPasswordResponseDto>);
 
   @override
-  _i8.Future<_i6.SignUpResponseDto> signUp(
-          _i13.SignUpRequestModel? signUpRequest) =>
+  _i9.Future<_i6.SignUpResponseDto> signUp(
+          _i14.SignUpRequestModel? signUpRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #signUp,
           [signUpRequest],
         ),
         returnValue:
-            _i8.Future<_i6.SignUpResponseDto>.value(_FakeSignUpResponseDto_4(
+            _i9.Future<_i6.SignUpResponseDto>.value(_FakeSignUpResponseDto_4(
           this,
           Invocation.method(
             #signUp,
             [signUpRequest],
           ),
         )),
-      ) as _i8.Future<_i6.SignUpResponseDto>);
+      ) as _i9.Future<_i6.SignUpResponseDto>);
+
+  @override
+  _i9.Future<_i7.LogoutResponseDto> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue:
+            _i9.Future<_i7.LogoutResponseDto>.value(_FakeLogoutResponseDto_5(
+          this,
+          Invocation.method(
+            #logout,
+            [],
+          ),
+        )),
+      ) as _i9.Future<_i7.LogoutResponseDto>);
 }

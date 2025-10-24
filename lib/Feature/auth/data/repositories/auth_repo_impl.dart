@@ -1,5 +1,6 @@
 import 'package:flower_e_commerce_app/Feature/auth/data/dataSources/auth_local_data_source.dart';
 import 'package:flower_e_commerce_app/Feature/auth/data/dataSources/auth_remote_data_source.dart';
+import 'package:flower_e_commerce_app/Feature/auth/domain/entities/response/logout_response_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entity/request/sign_in_request_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entities/requestEntities/sign_up_request_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entities/resposneEntities/sign_up_response_entity.dart';
@@ -67,5 +68,10 @@ class AuthRepoImpl implements AuthRepo {
   Future<ApiResult<SignUpResponseEntity>> signUp(
       SignUpRequestEntity signUpRequestEntity) {
     return _authRemoteDataSource.signup(signUpRequestEntity);
+  }
+
+  @override
+  Future<ApiResult<LogoutResponseEntity>> logout() {
+    return _authRemoteDataSource.logout();
   }
 }

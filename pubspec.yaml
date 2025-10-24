@@ -59,6 +59,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   awesome_snackbar_content: ^0.1.8
   webview_flutter: ^4.13.0
+  fluttertoast: ^9.0.0
 
 
 dev_dependencies:

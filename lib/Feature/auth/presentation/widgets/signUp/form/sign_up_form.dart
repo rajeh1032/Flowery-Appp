@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/events/sign_up_event.dart';
-import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/states/sign_Up_state.dart';
-import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/viewModel/signup_view_model.dart';
+import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/signUp/sign_up_event.dart';
+import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/signUp/sign_Up_state.dart';
+import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/signUp/signup_view_model.dart';
 import 'package:flower_e_commerce_app/Feature/auth/presentation/widgets/signUp/build_email_field.dart';
 import 'package:flower_e_commerce_app/Feature/auth/presentation/widgets/signUp/build_first_and_last_name_field.dart';
 import 'package:flower_e_commerce_app/Feature/auth/presentation/widgets/signUp/build_gender_filed.dart';

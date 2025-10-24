@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entity/request/sign_in_request_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entity/response/sign_in_response_entity.dart';
-import 'package:flower_e_commerce_app/Feature/auth/domain/use_cases/sign_in_use_case.dart';
+import 'package:flower_e_commerce_app/Feature/auth/domain/useCases/sign_in_use_case.dart';
 import 'package:flower_e_commerce_app/core/Errors/api_results.dart';
 import 'package:flower_e_commerce_app/core/Errors/failure.dart';
 import 'package:flutter/cupertino.dart';

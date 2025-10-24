@@ -1,4 +1,4 @@
-import 'package:flower_e_commerce_app/Feature/auth/api/model/responses/user_response_dto.dart';
+import 'package:flower_e_commerce_app/Feature/auth/api/models/response/user_response_dto.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entity/response/sign_in_response_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
