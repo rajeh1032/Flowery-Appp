@@ -91,3 +91,4 @@ lib/core/localization/locale_keys.g.dart
 linux/flutter/generated_plugin_registrant.cc
 linux/flutter/generated_plugin_registrant.h
 .env
+.env
