@@ -1,5 +1,5 @@
-import 'package:flower_e_commerce_app/Feature/AddressFeature/presentation/pages/add_address_screen.dart';
-import 'package:flower_e_commerce_app/Feature/AddressFeature/presentation/pages/saved_address_screen.dart';
+import 'package:flower_e_commerce_app/Feature/addressFeature/presentation/pages/add_address_screen.dart';
+import 'package:flower_e_commerce_app/Feature/addressFeature/presentation/pages/saved_address_screen.dart';
 import 'package:flower_e_commerce_app/Feature/auth/presentation/pages/forget_password_screen.dart';
 import 'package:flower_e_commerce_app/Feature/bestSellerFeature/presentation/pages/best_seller_screen.dart';
 import 'package:flower_e_commerce_app/Feature/editProfile/presentation/pages/edit_profile_screen.dart';
@@ -15,6 +15,7 @@ import 'package:flower_e_commerce_app/Feature/ordersPage/presentation/pages/orde
 import 'package:flower_e_commerce_app/Feature/mainLayout/tabs/profile_main/presentation/pages/profile_screen.dart';
 import 'package:flower_e_commerce_app/Feature/productDetails/presentation/page/product_details_screen.dart';
 import 'package:flower_e_commerce_app/Feature/searchFeature/presentation/pages/search_screen.dart';
+import 'package:flower_e_commerce_app/Feature/termsFeature/presentation/view/terms_about_provider.dart';
 import 'package:flower_e_commerce_app/Feature/trackOrder/presentation/pages/map_screen.dart';
 import 'package:flower_e_commerce_app/Feature/trackOrder/presentation/pages/track_order_screen.dart';
 import 'package:flower_e_commerce_app/core/models/occasion_input_model.dart';
@@ -74,6 +75,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case AppRoutes.editProfileRoute:
         return MaterialPageRoute(builder: (_) => EditProfileScreen());
+      case AppRoutes.termsScreenRoute:
+        return MaterialPageRoute(
+            builder: (_) => TermsAboutProvider.termsScreen());
+      case AppRoutes.aboutScreen:
+        return MaterialPageRoute(
+            builder: (_) => TermsAboutProvider.aboutScreen());
       case AppRoutes.trackOrderRoute:
         final orderId = settings.arguments as String;
         return MaterialPageRoute(

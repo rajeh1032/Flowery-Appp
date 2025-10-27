@@ -61,7 +61,6 @@ class ProductCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSizes.spaceBetweenItems_4),
 
-                /// ✅ Fixed Row Overflow
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -127,12 +126,20 @@ class ProductCard extends StatelessWidget {
                         size: AppSizes.smIcon_16,
                       ),
                       const SizedBox(width: AppSizes.spaceBetweenItems_2),
-                      Text(
-                        LocaleKeys.add_to_cart.tr(),
-                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              fontSize: AppSizes.xxsFont_10,
-                            ),
+                      Flexible(
+                        child: Text(
+                          LocaleKeys.add_to_cart.tr(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelSmall!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                fontSize: AppSizes.xxsFont_10,
+                              ),
+                          overflow:
+                              TextOverflow.ellipsis, 
+                          maxLines: 1, 
+                        ),
                       ),
                     ],
                   ),

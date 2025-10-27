@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/signin/sign_in_view_model.dart';
 import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/logout/logout_view_model.dart';
 import 'package:flower_e_commerce_app/Feature/auth/presentation/widgets/logout/logout_alert_dialogue.dart';
 import 'package:flower_e_commerce_app/core/Config/Theme/app_colors.dart';
 import 'package:flower_e_commerce_app/core/Di/di.dart';
+import 'package:flower_e_commerce_app/core/Widgets/guest_login_prompt.dart';
 import 'package:flower_e_commerce_app/core/helpers/routing_extensions.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/app_routes.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/sizes.dart';
@@ -24,23 +26,51 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(context),
-      body: BlocProvider<ProfileMainViewModel>(
-        create: (context) => viewModel..doIntend(GetLoggedUserDataEvent()),
-        child: Column(
-          children: [
-            ProfileHeaderBlocBuilder(),
-            SizedBox(
-              height: AppSizes.spaceBetweenItems_42,
-            ),
-            _buildOrdersAndAddress(context),
-            _buildNotification(),
-            _buildGeneralSettings(context),
-            _buildLogout(),
-          ],
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SigninViewModel>().checkAuthStatus();
+    });
+
+    return BlocProvider(
+      create: (context) =>
+          getIt<ProfileMainViewModel>()..doIntend(GetLoggedUserDataEvent()),
+      child: Scaffold(
+        appBar: _buildAppBar(context),
+        body: BlocBuilder<SigninViewModel, SignInState>(
+          builder: (context, state) {
+            if (state.isLoggedIn == true) {
+              return _buildProfileContent(context);
+            } else if (state.isLoggedIn == false) {
+              return Column(
+                children: [
+                  GuestLoginPrompt(
+                    message: LocaleKeys
+                        .please_log_in_to_view_and_manage_your_profile
+                        .tr(),
+                    buttonLoadingState: state.isLoading,
+                  ),
+                  SizedBox(height: AppSizes.spaceBetweenItems_16),
+                  _buildGeneralSettings(context),
+                ],
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
         ),
       ),
+    );
+  }
+
+  Widget _buildProfileContent(BuildContext context) {
+    return Column(
+      children: [
+        ProfileHeaderBlocBuilder(),
+        SizedBox(height: AppSizes.spaceBetweenItems_42),
+        _buildOrdersAndAddress(context),
+        _buildNotification(),
+        _buildGeneralSettings(context),
+        _buildLogout(),
+      ],
     );
   }
 
@@ -140,10 +170,7 @@ class ProfileScreen extends StatelessWidget {
     return Column(
       children: [
         ProfileMenuItem(
-          leadingIcon: Icon(
-            Icons.translate,
-            size: AppSizes.xxlFont_22,
-          ),
+          leadingIcon: Icon(Icons.translate, size: AppSizes.xxlFont_22),
           title: LocaleKeys.language.tr(),
           trailing: Text(
             LocaleKeys.english.tr(),
@@ -165,9 +192,15 @@ class ProfileScreen extends StatelessWidget {
           },
         ),
         SizedBox(height: AppSizes.spaceBetweenItems_16),
-        ProfileMenuItem(title: LocaleKeys.about_us.tr()),
+        ProfileMenuItem(
+          title: LocaleKeys.about_us.tr(),
+          onTap: () => context.pushNamed(AppRoutes.aboutScreen),
+        ),
         SizedBox(height: AppSizes.spaceBetweenItems_16),
-        ProfileMenuItem(title: LocaleKeys.terms_conditions.tr()),
+        ProfileMenuItem(
+          title: LocaleKeys.terms_conditions.tr(),
+          onTap: () => context.pushNamed(AppRoutes.termsScreenRoute),
+        ),
         SizedBox(height: AppSizes.spaceBetweenItems_16),
         Divider(color: AppColorsLight.white[70]),
         SizedBox(height: AppSizes.spaceBetweenItems_16),

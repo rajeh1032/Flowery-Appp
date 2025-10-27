@@ -71,7 +71,19 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<ApiResult<LogoutResponseEntity>> logout() {
-    return _authRemoteDataSource.logout();
+  Future<ApiResult<LogoutResponseEntity>> logout() async {
+    final result = await _authRemoteDataSource.logout();
+
+    if (result is ApiSuccessResult<LogoutResponseEntity>) {
+      await _authLocalDataSource.deleteToken();
+      await _authLocalDataSource.setRememberMe(rememberMe: false);
+    }
+
+    return result;
+  }
+
+  @override
+  Future<bool> isLoggedIn() async {
+    return await _authLocalDataSource.isUserLoggedIn();
   }
 }

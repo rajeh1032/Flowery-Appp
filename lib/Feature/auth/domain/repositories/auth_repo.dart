@@ -31,4 +31,5 @@ abstract interface class AuthRepo {
       SignUpRequestEntity signUpRequestEntity);
 
   Future<ApiResult<LogoutResponseEntity>> logout();
+  Future<bool> isLoggedIn();
 }

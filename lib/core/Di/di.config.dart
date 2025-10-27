@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i361;
+import 'package:flutter/material.dart' as _i409;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
@@ -55,6 +56,8 @@ import '../../Feature/auth/data/dataSources/auth_remote_data_source.dart'
     as _i896;
 import '../../Feature/auth/data/repositories/auth_repo_impl.dart' as _i923;
 import '../../Feature/auth/domain/repositories/auth_repo.dart' as _i466;
+import '../../Feature/auth/domain/useCases/check_user_loggedIn_use_case.dart'
+    as _i902;
 import '../../Feature/auth/domain/useCases/forget_password_use_case.dart'
     as _i568;
 import '../../Feature/auth/domain/useCases/logout_use_case.dart' as _i714;
@@ -216,6 +219,24 @@ import '../../Feature/searchFeature/domain/useCases/product_search_use_case.dart
     as _i167;
 import '../../Feature/searchFeature/presentation/viewModel/search_view_model.dart'
     as _i670;
+import '../../Feature/termsFeature/api/dataSource/local/terms_about_local_data_source_impl.dart'
+    as _i603;
+import '../../Feature/termsFeature/data/dataSources/terms_about_local_data_source.dart'
+    as _i702;
+import '../../Feature/termsFeature/data/repositories/terms_about_repo_impl.dart'
+    as _i857;
+import '../../Feature/termsFeature/domain/repositories/terms_about_repo.dart'
+    as _i989;
+import '../../Feature/termsFeature/domain/useCases/get_about_use_case.dart'
+    as _i36;
+import '../../Feature/termsFeature/domain/useCases/get_terms_use_case.dart'
+    as _i190;
+import '../../Feature/termsFeature/presentation/viewModel/terms_about_view_model.dart'
+    as _i64;
+import '../../Feature/termsFeature/presentation/widgets/about_screen.dart'
+    as _i751;
+import '../../Feature/termsFeature/presentation/widgets/terms_screen.dart'
+    as _i269;
 import '../../Feature/trackMap/api/client/track_map_api_service.dart' as _i345;
 import '../../Feature/trackMap/api/datasources/track_map_remote_data_source_impl.dart'
     as _i642;
@@ -268,6 +289,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i361.Dio>(() => dioModule.provideDio());
     gh.factory<_i436.AddressLocalDataSource>(
         () => _i932.AddressLocalDataSourceImpl());
+    gh.factory<_i751.AboutScreen>(
+        () => _i751.AboutScreen(key: gh<_i409.Key>()));
+    gh.factory<_i269.TermsScreen>(
+        () => _i269.TermsScreen(key: gh<_i409.Key>()));
     gh.factory<_i304.AddressApiServices>(
         () => _i304.AddressApiServices.new(gh<_i361.Dio>()));
     gh.factory<_i500.ApiServices>(() => _i500.ApiServices.new(gh<_i361.Dio>()));
@@ -295,6 +320,8 @@ extension GetItInjectableX on _i174.GetIt {
             apiServicest: gh<_i304.AddressApiServices>()));
     gh.factory<_i245.OccasionRemoteDataSource>(() =>
         _i108.OccasionRemoteDataSourceImpl(gh<_i713.OccasionApiService>()));
+    gh.factory<_i702.TermsAboutLocalDataSource>(
+        () => const _i603.TermsAboutLocalDataSourceImpl());
     gh.factory<_i557.RealTimeDataBaseService>(
       () => _i289.FirebaseRealTimeDatabaseService(),
       instanceName: 'firebaseRealTimeDatabase',
@@ -322,6 +349,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i571.TrackOrderRepoImpl(gh<_i281.TrackOrderRemoteDataSource>()));
     gh.factory<_i691.CategoriesRepo>(() => _i1066.CategoriesRepoImpl(
         categoriesRemoteDataSource: gh<_i341.CategoriesRemoteDataSource>()));
+    gh.factory<_i989.TermsAboutRepo>(() => _i857.TermsAboutRepoImpl(
+        localDataSource: gh<_i702.TermsAboutLocalDataSource>()));
     gh.factory<_i509.SearchRemoteDataSource>(
         () => _i112.SearchRemoteDataSourceImpl(gh<_i104.SearchApiService>()));
     gh.factory<_i886.SearchRepo>(
@@ -355,12 +384,10 @@ extension GetItInjectableX on _i174.GetIt {
             categoriesRepo: gh<_i691.CategoriesRepo>()));
     gh.factory<_i516.BestSellerRepo>(() => _i983.BestSellerRepoImpl(
         dataSource: gh<_i806.BestSellerRemoteDataSource>()));
+    gh.factory<_i896.AuthRemoteDataSource>(
+        () => _i515.AuthRemoteDataSourceImpl(gh<_i500.ApiServices>()));
     gh.factory<_i215.OccasionRepo>(
         () => _i782.OccasionRepoImpl(gh<_i245.OccasionRemoteDataSource>()));
-    gh.factory<_i896.AuthRemoteDataSource>(() => _i515.AuthRemoteDataSourceImpl(
-          gh<_i500.ApiServices>(),
-          gh<_i901.AuthLocalDataSource>(),
-        ));
     gh.factory<_i718.AddressRepo>(() => _i98.AddressRepoImpl(
           addressRemoteDataSource: gh<_i115.AddressRemoteDataSource>(),
           addressLocalDataSource: gh<_i436.AddressLocalDataSource>(),
@@ -377,6 +404,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i790.CartRemoteDataSourceImpl(gh<_i115.CartApiService>()));
     gh.factory<_i155.TrackMapRepo>(
         () => _i795.TrackMapRepoImpl(gh<_i73.TrackMapRemoteDataSource>()));
+    gh.factory<_i36.GetAboutUseCase>(
+        () => _i36.GetAboutUseCase(repository: gh<_i989.TermsAboutRepo>()));
+    gh.factory<_i190.GetTermsUseCase>(
+        () => _i190.GetTermsUseCase(repository: gh<_i989.TermsAboutRepo>()));
     gh.factory<_i53.GetRouteUseCase>(
         () => _i53.GetRouteUseCase(gh<_i155.TrackMapRepo>()));
     gh.factory<_i179.DeleteAddressUseCase>(
@@ -452,6 +483,10 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i136.VerifyResetCodeUseCase>(),
               gh<_i576.ResetPasswordUseCase>(),
             ));
+    gh.factory<_i64.TermsAboutViewModel>(() => _i64.TermsAboutViewModel(
+          gh<_i190.GetTermsUseCase>(),
+          gh<_i36.GetAboutUseCase>(),
+        ));
     gh.factory<_i1057.CategoriesViewModel>(() => _i1057.CategoriesViewModel(
           gh<_i66.CategoriesUseCase>(),
           gh<_i137.GetProductsByCategoryUseCase>(),
@@ -481,8 +516,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i1.CreateCashOrderUseCase>(),
           gh<_i140.CreateVisaOrderUseCase>(),
         ));
-    gh.factory<_i301.SigninViewModel>(
-        () => _i301.SigninViewModel(gh<_i375.SigninUseCase>()));
     gh.factory<_i1055.GetUserCartUseCase>(
         () => _i1055.GetUserCartUseCase(gh<_i262.CartRepo>()));
     gh.factory<_i505.ProfileMainViewModel>(
@@ -507,6 +540,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i877.LogoutViewModel(gh<_i714.LogoutUseCase>()));
     gh.factory<_i990.SignupViewModel>(
         () => _i990.SignupViewModel(gh<_i630.SignUpUseCase>()));
+    gh.factory<_i902.CheckUserLoggedInUseCase>(
+        () => _i902.CheckUserLoggedInUseCase(gh<_i466.AuthRepo>()));
+    gh.factory<_i301.SigninViewModel>(() => _i301.SigninViewModel(
+          gh<_i375.SigninUseCase>(),
+          gh<_i902.CheckUserLoggedInUseCase>(),
+        ));
     return this;
   }
 }

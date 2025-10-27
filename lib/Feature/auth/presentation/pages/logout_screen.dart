@@ -3,7 +3,7 @@ import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/logout
 import 'package:flower_e_commerce_app/Feature/auth/presentation/widgets/logout/logout_alert_dialogue.dart';
 import 'package:flower_e_commerce_app/core/Config/Theme/app_colors.dart';
 import 'package:flower_e_commerce_app/core/Di/di.dart';
-import 'package:flower_e_commerce_app/core/l10n/locale_keys.g.dart';
+import 'package:flower_e_commerce_app/core/localization/locale_keys.g.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

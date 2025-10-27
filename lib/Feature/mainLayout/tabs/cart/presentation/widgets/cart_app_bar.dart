@@ -5,9 +5,11 @@ import 'package:flower_e_commerce_app/Feature/mainLayout/tabs/cart/presentation/
 import 'package:flower_e_commerce_app/core/Config/Theme/app_colors.dart';
 import 'package:flower_e_commerce_app/core/Widgets/custom_app_bar.dart';
 import 'package:flower_e_commerce_app/core/localization/locale_keys.g.dart';
+import 'package:flower_e_commerce_app/core/utils/Constantts/app_assets.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CartAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CartAppBar({super.key});
@@ -25,7 +27,12 @@ class CartAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             child: Row(
               children: [
-                CustomBackButton(title: LocaleKeys.cart.tr(),onTap: (){},),
+                SvgPicture.asset(
+                  Assets.assetsImagesLogo,
+                  height: AppSizes.photoHeight_32,
+                  width: AppSizes.photoWidth_32,
+                  fit: BoxFit.contain,
+                ),
                 Text(
                   ' (${(state.cartEntity?.numberOfCartItems ?? 0)} ${LocaleKeys.items.tr()})',
                   style: Theme.of(

@@ -15,6 +15,7 @@ class CustomBackButton extends StatelessWidget implements PreferredSizeWidget {
       child: Padding(
         padding: const EdgeInsets.only(
           left: AppSizes.paddingMd_16,
+          right: AppSizes.paddingMd_16,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

@@ -220,5 +220,10 @@
   "order_success_message": "تم وضع طلبك بنجاح!",
   "confirm_logout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
   "cancel": "إلغاء",
-  "logout_successfully": "تم تسجيل الخروج بنجاح"
+  "logout_successfully": "تم تسجيل الخروج بنجاح",
+  "please_log_to_view_your_cart": "يرجى تسجيل الدخول لاظهار سلة التسوق واكمال الشراء.",
+  " please_log_in_to_view_and_manage_your_profile": "يرجى تسجيل الدخول لاظهار وتحديث الملف الشخصي.",
+  "product_added_successfully": "تمت اضافة المنتج بنجاح",
+  "about_app": "حول التطبيق",
+  "terms_and_conditions": "الشروط والاحكام"
 }

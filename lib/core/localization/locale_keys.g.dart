@@ -225,5 +225,9 @@ abstract class  LocaleKeys {
   static const confirm_logout = 'confirm_logout';
   static const cancel = 'cancel';
   static const logout_successfully = 'logout_successfully';
+  static const please_log_to_view_your_cart = 'please_log_to_view_your_cart';
+  static const  please_log_in_to_view_and_manage_your_profile = ' please_log_in_to_view_and_manage_your_profile';
+  static const product_added_successfully = 'product_added_successfully';
+  static const about_app = 'about_app';
 
 }

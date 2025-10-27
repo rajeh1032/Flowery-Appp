@@ -14,6 +14,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+// ✅ استورد SigninViewModel
+import 'package:flower_e_commerce_app/Feature/auth/presentation/viewModel/signin/sign_in_view_model.dart';
+
 void main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,10 +41,16 @@ void main() async {
 class FlowerECommerceApp extends StatelessWidget {
   const FlowerECommerceApp({super.key, required this.initialRoute});
   final String initialRoute;
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<AppConfigCubit>()..loadSavedLocale(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => getIt<AppConfigCubit>()..loadSavedLocale()),
+        BlocProvider(
+            create: (_) => getIt<SigninViewModel>()..checkAuthStatus()),
+      ],
       child: BlocBuilder<AppConfigCubit, Locale>(
         builder: (context, localeState) {
           return MaterialApp(

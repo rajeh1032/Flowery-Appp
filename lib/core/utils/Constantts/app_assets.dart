@@ -129,4 +129,6 @@ class Assets {
   static const String selectedIcon = 'assets/images/selected.svg';
   static const String unselectedIcon = 'assets/images/unselected.svg';
   static const String successLogo = 'assets/images/success_logo.svg';
+  static const String signInLotti =
+      'assets/animations/Login Character Animation (1).json';
 }

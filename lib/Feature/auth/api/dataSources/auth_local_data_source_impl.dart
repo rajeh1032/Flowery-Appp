@@ -46,4 +46,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<void> deleteToken() async {
     await _storage.delete(key: AppConstants.token);
   }
+
+  @override
+  Future<bool> isUserLoggedIn() async {
+    final token = await _storage.read(key: AppConstants.token);
+    return token.isNotEmpty;
+  }
 }

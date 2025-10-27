@@ -1,23 +1,14 @@
 name: flower_e_commerce_app
 description: "A new Flutter project."
 
-
-
-
 publish_to: "none"
-
-
 
 version: 1.0.0+1
 
 environment:
-
   sdk: ">=3.1.0 <4.0.0"
 
-
-
   flutter: ">=1.17.0"
-
 
 dependencies:
   flutter:
@@ -60,7 +51,7 @@ dependencies:
   awesome_snackbar_content: ^0.1.8
   webview_flutter: ^4.13.0
   fluttertoast: ^9.0.0
-
+  lottie: ^3.3.2
 
 dev_dependencies:
   flutter_test:
@@ -73,13 +64,9 @@ dev_dependencies:
 
   retrofit_generator: ^10.0.4
 
-
-
   injectable_generator: ^2.8.1
 
   mockito: ^5.5.0
-
-
 
 flutter:
   uses-material-design: true
@@ -90,8 +77,10 @@ flutter:
     - assets/translations/
     - assets/json/
     - assets/mapStyles/
+    - assets/animations/
     - .env
-
+    - assets/json/aboutus.json
+    - assets/json/termsconditions.json
 
   fonts:
     - family: Inter

@@ -221,5 +221,10 @@
   "order_success_message": "Your order placed successfully!",
   "confirm_logout": "Are you sure you want to logout?",
   "cancel": "Cancel",
-  "logout_successfully": "Logged out successfully"
+  "logout_successfully": "Logged out successfully",
+  "please_log_to_view_your_cart": "Please log in to view your cart and complete your purchase.",
+  " please_log_in_to_view_and_manage_your_profile": "Please log in to view and manage your profile.",
+  "product_added_successfully": "Product added successfully",
+  "about_app": "About app",
+  "terms_and_conditions": "Terms and conditions"
 }

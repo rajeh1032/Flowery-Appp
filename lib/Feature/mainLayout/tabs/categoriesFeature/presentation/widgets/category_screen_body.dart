@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flower_e_commerce_app/Feature/mainLayout/tabs/categoriesFeature/presentation/viewModel/events/categories_event.dart';
 import 'package:flower_e_commerce_app/Feature/mainLayout/tabs/categoriesFeature/presentation/viewModel/states/categories_state.dart';
 import 'package:flower_e_commerce_app/Feature/mainLayout/tabs/categoriesFeature/presentation/viewModel/viewModel/categories_view_model.dart';
@@ -7,6 +8,7 @@ import 'package:flower_e_commerce_app/Feature/mainLayout/tabs/categoriesFeature/
 import 'package:flower_e_commerce_app/core/Functions/snack_bar.dart';
 import 'package:flower_e_commerce_app/core/Widgets/search_list_tile.dart';
 import 'package:flower_e_commerce_app/core/helpers/dialogue_utils.dart';
+import 'package:flower_e_commerce_app/core/localization/locale_keys.g.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/app_constants.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/sizes.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,7 @@ class CategoryScreenBody extends StatelessWidget {
                 .textTheme
                 .bodyMedium!
                 .copyWith(color: Theme.of(context).colorScheme.onPrimary),
-            message: 'product added successfully',
+            message: LocaleKeys.product_added_successfully.tr(),
           );
         } else if (state.addToCartFailure != null &&
             state.addToCartResponse == null) {
@@ -100,13 +102,11 @@ class CategoryScreenBody extends StatelessWidget {
                           .displayProducts
                           .isEmpty &&
                       !state.isProductsLoading
-                  ? const Center(
-                      child: Text(
-                        'No products found',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                        ),
+                  ? Center(
+                      child: Icon(
+                        Icons.shopping_bag_outlined,
+                        size: AppSizes.lgIcon_60,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     )
                   : ProductGrid(

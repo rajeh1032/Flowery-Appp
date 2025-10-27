@@ -29,10 +29,8 @@ import '../../domain/entity/request/sign_in_request_entity.dart';
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final ApiServices _apiServices;
-  final AuthLocalDataSource _authLocalDataSource;
   AuthRemoteDataSourceImpl(
     this._apiServices,
-    this._authLocalDataSource,
   );
   @override
   Future<ApiResult<SigninResponseEntity>> signin(
@@ -133,7 +131,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<ApiResult<LogoutResponseEntity>> logout() async {
     try {
       var response = await _apiServices.logout();
-      await _authLocalDataSource.deleteToken();
       return ApiSuccessResult<LogoutResponseEntity>(data: response.toEntity());
     } on DioException catch (dioError) {
       final failure = ServerFailure.fromDioError(dioException: dioError);

@@ -5,4 +5,5 @@ abstract interface class AuthLocalDataSource {
   Future<ApiResult<void>> setRememberMe({required bool rememberMe});
   Future<bool> getRememberMe();
   Future<void> deleteToken();
+  Future<bool> isUserLoggedIn();
 }

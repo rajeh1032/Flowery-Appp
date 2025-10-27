@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entity/request/sign_in_request_entity.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/entity/response/sign_in_response_entity.dart';
+import 'package:flower_e_commerce_app/Feature/auth/domain/useCases/check_user_loggedIn_use_case.dart';
 import 'package:flower_e_commerce_app/Feature/auth/domain/useCases/sign_in_use_case.dart';
 import 'package:flower_e_commerce_app/core/Errors/api_results.dart';
 import 'package:flower_e_commerce_app/core/Errors/failure.dart';
@@ -12,7 +13,9 @@ part 'sign_in_state.dart';
 @injectable
 class SigninViewModel extends Cubit<SignInState> {
   final SigninUseCase _useCase;
-  SigninViewModel(this._useCase) : super(SignInState());
+  final CheckUserLoggedInUseCase _checkUserLoggedInUseCase;
+  SigninViewModel(this._useCase, this._checkUserLoggedInUseCase)
+      : super(SignInState());
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
@@ -20,18 +23,14 @@ class SigninViewModel extends Cubit<SignInState> {
   bool rememberMe = false;
 
   Future<void> signin() async {
-    if(formKey.currentState!.validate()){
-      emit(state.copyWith(
-          isLoading: true
-      ));
+    if (formKey.currentState!.validate()) {
+      emit(state.copyWith(isLoading: true));
       final result = await _useCase.invoke(
         request: SigninRequestEntity(
-            email: emailController.text,
-            password: passwordController.text
-        ),
+            email: emailController.text, password: passwordController.text),
         rememberMeChecked: rememberMe,
       );
-      switch(result){
+      switch (result) {
         case ApiSuccessResult<SigninResponseEntity>():
           emit(state.copyWith(
             response: result.data,
@@ -40,9 +39,19 @@ class SigninViewModel extends Cubit<SignInState> {
         case ApiErrorResult<SigninResponseEntity>():
           emit(state.copyWith(
               failure: Failure(errorMessage: result.failure.errorMessage),
-              isLoading: false
-          ));
+              isLoading: false));
       }
     }
+  }
+
+  Future<void> checkAuthStatus() async {
+    emit(state.copyWith(isLoading: true));
+
+    final result = await _checkUserLoggedInUseCase.invoke();
+
+    emit(state.copyWith(
+      isLoggedIn: result,
+      isLoading: false,
+    ));
   }
 }

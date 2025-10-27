@@ -15,40 +15,41 @@ class CartItem extends StatelessWidget {
     required this.cartItemEntity,
     required this.loadingProducts,
   });
+
   final CartProductEntity cartItemEntity;
   final bool loadingProducts;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsetsGeometry.all(AppSizes.paddingSm_8),
+      padding: const EdgeInsets.all(AppSizes.paddingSm_8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSizes.borderRadiusMd_8),
         border: Border.all(color: AppColorsLight.grey),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusMd_8),
             child: CachedNetworkImage(
-              imageUrl: cartItemEntity.productImage!,
+              imageUrl: cartItemEntity.productImage ?? '',
               width: AppSizes.cartImageWidth,
               height: AppSizes.cartImageHigh,
               fit: BoxFit.cover,
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (_, __, ___) => const Icon(Icons.error),
             ),
           ),
-          SizedBox(width: AppSizes.spaceBetweenItems_8),
+          const SizedBox(width: AppSizes.spaceBetweenItems_8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: AppSizes.cartProductNameWidth,
+                    Expanded(
                       child: Text(
-                        cartItemEntity.productName!,
+                        cartItemEntity.productName ?? '',
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
@@ -60,31 +61,35 @@ class CartItem extends StatelessWidget {
                               productId: cartItemEntity.productId!,
                             );
                       },
-                      child: Icon(Icons.delete, color: AppColorsLight.red),
+                      child:
+                          const Icon(Icons.delete, color: AppColorsLight.red),
                     ),
                   ],
                 ),
-                SizedBox(height: AppSizes.spaceBetweenItems_4),
+                const SizedBox(height: AppSizes.spaceBetweenItems_4),
                 Text(
-                  cartItemEntity.productName!,
+                  cartItemEntity.productName ?? '',
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelSmall!.copyWith(color: AppColorsLight.grey),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelSmall!
+                      .copyWith(color: AppColorsLight.grey),
                 ),
-                SizedBox(height: AppSizes.spaceBetweenItems_24),
+                const SizedBox(height: AppSizes.spaceBetweenItems_24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '${LocaleKeys.currency.tr()} ${cartItemEntity.productPrice!.toString()}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayMedium!
-                          .copyWith(fontWeight: FontWeight.w600),
+                    Flexible(
+                      child: Text(
+                        '${LocaleKeys.currency.tr()} ${cartItemEntity.productPrice ?? 0}',
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
                     ),
                     Row(
-                      spacing: AppSizes.spaceBetweenItems_8,
                       children: [
                         GestureDetector(
                           onTap: loadingProducts
@@ -97,18 +102,15 @@ class CartItem extends StatelessWidget {
                                         isIncrement: false,
                                       );
                                 },
-                          child: Icon(Icons.remove),
+                          child: const Icon(Icons.remove),
                         ),
+                        const SizedBox(width: 8),
                         loadingProducts
-                            ? SizedBox(
-                                height: AppSizes
-                                    .cartAddAndRemoveCircleLoadingIndicatorHigh,
-                                width: AppSizes
-                                    .cartAddAndRemoveCircleLoadingIndicatorWidth,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: AppSizes
-                                      .cartAddAndRemoveCircleLoadingIndicatorStrokeWidth,
-                                ),
+                            ? const SizedBox(
+                                height: 16,
+                                width: 16,
+                                child:
+                                    CircularProgressIndicator(strokeWidth: 2),
                               )
                             : Text(
                                 cartItemEntity.quantity.toString(),
@@ -117,6 +119,7 @@ class CartItem extends StatelessWidget {
                                     .displayMedium!
                                     .copyWith(fontWeight: FontWeight.w600),
                               ),
+                        const SizedBox(width: 8),
                         GestureDetector(
                           onTap: loadingProducts
                               ? null
@@ -128,7 +131,7 @@ class CartItem extends StatelessWidget {
                                         isIncrement: true,
                                       );
                                 },
-                          child: Icon(Icons.add),
+                          child: const Icon(Icons.add),
                         ),
                       ],
                     ),

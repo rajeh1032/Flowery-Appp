@@ -9,10 +9,10 @@ class CartProductShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: 4,
       separatorBuilder: (context, index) =>
-          SizedBox(height: AppSizes.spaceBetweenItems_24),
+          const SizedBox(height: AppSizes.spaceBetweenItems_24),
       itemBuilder: (context, index) => Container(
         padding: const EdgeInsets.all(AppSizes.paddingSm_8),
         margin: const EdgeInsets.symmetric(horizontal: AppSizes.paddingMd_16),
@@ -21,8 +21,8 @@ class CartProductShimmer extends StatelessWidget {
           border: Border.all(color: AppColorsLight.shimmerColor),
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image placeholder
             Shimmer(
               color: AppColorsLight.white,
               child: ClipRRect(
@@ -34,27 +34,28 @@ class CartProductShimmer extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: AppSizes.spaceBetweenItems_8),
+            const SizedBox(width: AppSizes.spaceBetweenItems_8),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Shimmer(
-                        color: AppColorsLight.white,
-                        child: Container(
-                          width: AppSizes.cartProductNameWidth,
-                          height: AppSizes.cartProductNameHigh,
-                          decoration: BoxDecoration(
-                            color: AppColorsLight.shimmerColor,
-                            borderRadius: BorderRadius.circular(
-                              AppSizes.borderRadiusSm_4,
+                      Flexible(
+                        child: Shimmer(
+                          color: AppColorsLight.white,
+                          child: Container(
+                            height: AppSizes.cartProductNameHigh,
+                            decoration: BoxDecoration(
+                              color: AppColorsLight.shimmerColor,
+                              borderRadius: BorderRadius.circular(
+                                AppSizes.borderRadiusSm_4,
+                              ),
                             ),
                           ),
                         ),
                       ),
+                      const SizedBox(width: AppSizes.spaceBetweenItems_8),
                       Shimmer(
                         color: AppColorsLight.white,
                         child: Container(
@@ -70,11 +71,11 @@ class CartProductShimmer extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: AppSizes.spaceBetweenItems_4),
+                  const SizedBox(height: AppSizes.spaceBetweenItems_4),
                   Shimmer(
                     color: AppColorsLight.white,
                     child: Container(
-                      width: AppSizes.cartProductNameWidth * 0.8,
+                      width: double.infinity,
                       height: AppSizes.cartProductNameHigh,
                       decoration: BoxDecoration(
                         color: AppColorsLight.shimmerColor,
@@ -84,73 +85,49 @@ class CartProductShimmer extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: AppSizes.spaceBetweenItems_24),
+                  const SizedBox(height: AppSizes.spaceBetweenItems_24),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Shimmer(
-                        color: AppColorsLight.white,
-                        child: Container(
-                          width: AppSizes.cartProductNameWidth * 0.5,
-                          height: AppSizes.cartProductNameHigh,
-                          decoration: BoxDecoration(
-                            color: AppColorsLight.shimmerColor,
-                            borderRadius: BorderRadius.circular(
-                              AppSizes.borderRadiusMd_8,
+                      Flexible(
+                        flex: 2,
+                        child: Shimmer(
+                          color: AppColorsLight.white,
+                          child: Container(
+                            height: AppSizes.cartProductNameHigh,
+                            decoration: BoxDecoration(
+                              color: AppColorsLight.shimmerColor,
+                              borderRadius: BorderRadius.circular(
+                                AppSizes.borderRadiusMd_8,
+                              ),
                             ),
                           ),
                         ),
                       ),
+                      const Spacer(),
                       Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Shimmer(
-                            color: AppColorsLight.white,
-                            child: Container(
-                              width: AppSizes
-                                  .cartProductPluseAndNegetiveButtonHighWidth,
-                              height: AppSizes
-                                  .cartProductPluseAndNegetiveButtonHighWidth,
-                              decoration: BoxDecoration(
-                                color: AppColorsLight.shimmerColor,
-                                borderRadius: BorderRadius.circular(
-                                  AppSizes.borderRadiusMd_8,
+                          for (int i = 0; i < 3; i++) ...[
+                            Shimmer(
+                              color: AppColorsLight.white,
+                              child: Container(
+                                width: AppSizes
+                                    .cartProductPluseAndNegetiveButtonHighWidth,
+                                height: AppSizes
+                                        .cartProductPluseAndNegetiveButtonHighWidth +
+                                    (i == 1 ? 6 : 0),
+                                decoration: BoxDecoration(
+                                  color: AppColorsLight.shimmerColor,
+                                  borderRadius: BorderRadius.circular(
+                                    AppSizes.borderRadiusMd_8,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: AppSizes.spaceBetweenItems_8),
-                          Shimmer(
-                            color: AppColorsLight.white,
-                            child: Container(
-                              width: AppSizes
-                                  .cartProductPluseAndNegetiveButtonHighWidth,
-                              height: AppSizes
-                                      .cartProductPluseAndNegetiveButtonHighWidth +
-                                  6,
-                              decoration: BoxDecoration(
-                                color: AppColorsLight.shimmerColor,
-                                borderRadius: BorderRadius.circular(
-                                  AppSizes.borderRadiusSm_4,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: AppSizes.spaceBetweenItems_8),
-                          Shimmer(
-                            color: AppColorsLight.white,
-                            child: Container(
-                              width: AppSizes
-                                  .cartProductPluseAndNegetiveButtonHighWidth,
-                              height: AppSizes
-                                  .cartProductPluseAndNegetiveButtonHighWidth,
-                              decoration: BoxDecoration(
-                                color: AppColorsLight.shimmerColor,
-                                borderRadius: BorderRadius.circular(
-                                  AppSizes.borderRadiusMd_8,
-                                ),
-                              ),
-                            ),
-                          ),
+                            if (i < 2)
+                              const SizedBox(
+                                  width: AppSizes.spaceBetweenItems_8),
+                          ],
                         ],
                       ),
                     ],
