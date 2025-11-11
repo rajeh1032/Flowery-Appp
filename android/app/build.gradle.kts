@@ -39,6 +39,20 @@ android {
         versionName = flutter.versionName
 manifestPlaceholders.put("GOOGLE_MAPS_API_KEY", env.getProperty("GOOGLE_MAPS_API_KEY") ?: "")
     }
+    
+
+    flavorDimensions += "default"
+    productFlavors {
+       create("development") {
+            dimension = "default"
+            applicationIdSuffix = ".dev"
+            resValue("string", "app_name", "Flowery Development")
+        }
+        create("production") {
+            dimension = "default"
+            resValue("string", "app_name", "Flowery Production")
+        }
+    }
 
     buildTypes {
         release {
