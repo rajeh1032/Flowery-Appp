@@ -38,4 +38,7 @@ abstract class ApiConstants {
   static const String xGoogFieldMask = 'X-Goog-FieldMask';
   static const String cashOrder = 'orders';
   static const String visaOrder = 'orders/checkout?url=http://localhost:3000';
+  static const String orderCollection = "orders";
+  static const String userState = "userState";
+  static const String vehicles = "vehicles/{vehicleId}";
 }

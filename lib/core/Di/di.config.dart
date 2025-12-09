@@ -9,10 +9,14 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:dio/dio.dart' as _i361;
 import 'package:flutter/material.dart' as _i409;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:internet_connection_checker/internet_connection_checker.dart'
+    as _i973;
+import 'package:location/location.dart' as _i645;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
 
 import '../../Feature/AddressFeature/api/client/address_api_service.dart'
@@ -249,25 +253,30 @@ import '../../Feature/trackMap/domain/repositories/track_map_repo.dart'
 import '../../Feature/trackMap/domain/useCases/get_route_use_case.dart' as _i53;
 import '../../Feature/trackMap/presentation/viewModel/track_map_view_model.dart'
     as _i406;
-import '../../Feature/trackOrder/data/dataSources/track_order_remote_data_source.dart'
-    as _i281;
-import '../../Feature/trackOrder/data/dataSources/track_order_remote_data_source_impl.dart'
-    as _i706;
-import '../../Feature/trackOrder/data/repositories/track_order_repo_impl.dart'
-    as _i571;
-import '../../Feature/trackOrder/domain/repositories/track_order_repo.dart'
-    as _i164;
-import '../../Feature/trackOrder/domain/useCases/track_order_use_case.dart'
-    as _i266;
-import '../../Feature/trackOrder/presentation/viewModel/trackOrderViewModel/track_order_view_model.dart'
-    as _i891;
+import '../../Feature/trackOrder/api/client/track_order_api_service.dart'
+    as _i206;
+import '../../Feature/trackOrder/data/data_source/track_order_remote_ds.dart'
+    as _i913;
+import '../../Feature/trackOrder/data/data_source/track_order_remote_ds_imp.dart'
+    as _i779;
+import '../../Feature/trackOrder/data/repo/track_order_repo_imp.dart' as _i1052;
+import '../../Feature/trackOrder/domain/repo/track_order_repo.dart' as _i470;
+import '../../Feature/trackOrder/domain/use_case/get_order_stream_use_case.dart'
+    as _i560;
+import '../../Feature/trackOrder/domain/use_case/get_vehicle_by_id_use_case.dart'
+    as _i169;
+import '../../Feature/trackOrder/domain/use_case/update_order_firebase_use_case.dart'
+    as _i97;
+import '../../Feature/trackOrder/presentaion/view_model/track_order_cubit.dart'
+    as _i670;
 import '../classes/remote_executor.dart' as _i132;
+import '../Errors/internet_connection.dart' as _i544;
 import '../helpers/app_config_cubit.dart' as _i713;
-import '../Services/fire_base_real_time_database_service.dart' as _i289;
-import '../Services/real_time_database_service.dart' as _i557;
+import '../Services/firebase_services.dart' as _i756;
 import '../Services/secure_storage.dart' as _i927;
 import '../Services/storage_interface.dart' as _i456;
 import 'dioModul/dio_modle.dart' as _i456;
+import 'dioModul/external_modules.dart' as _i649;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -281,12 +290,18 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final dioModule = _$DioModule();
+    final externalModules = _$ExternalModules();
     gh.factory<_i132.FirebaseRemoteExecutor>(
         () => _i132.FirebaseRemoteExecutor());
     gh.factory<_i132.ApiRemoteExecutor>(() => _i132.ApiRemoteExecutor());
     gh.lazySingleton<_i528.PrettyDioLogger>(
         () => dioModule.providePrettyDioLogger());
     gh.lazySingleton<_i361.Dio>(() => dioModule.provideDio());
+    gh.lazySingleton<_i973.InternetConnectionChecker>(
+        () => externalModules.provideInternetConnectionChecker());
+    gh.lazySingleton<_i645.Location>(() => externalModules.provideLocation());
+    gh.lazySingleton<_i974.FirebaseFirestore>(
+        () => externalModules.provideFirebaseFirestore());
     gh.factory<_i436.AddressLocalDataSource>(
         () => _i932.AddressLocalDataSourceImpl());
     gh.factory<_i751.AboutScreen>(
@@ -315,6 +330,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i104.SearchApiService.new(gh<_i361.Dio>()));
     gh.factory<_i345.TrackMapApiService>(
         () => _i345.TrackMapApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i206.TrackOrderApiService>(
+        () => _i206.TrackOrderApiService.new(gh<_i361.Dio>()));
     gh.factory<_i115.AddressRemoteDataSource>(() =>
         _i824.AddressRemoteDataSourceImpl(
             apiServicest: gh<_i304.AddressApiServices>()));
@@ -322,10 +339,6 @@ extension GetItInjectableX on _i174.GetIt {
         _i108.OccasionRemoteDataSourceImpl(gh<_i713.OccasionApiService>()));
     gh.factory<_i702.TermsAboutLocalDataSource>(
         () => const _i603.TermsAboutLocalDataSourceImpl());
-    gh.factory<_i557.RealTimeDataBaseService>(
-      () => _i289.FirebaseRealTimeDatabaseService(),
-      instanceName: 'firebaseRealTimeDatabase',
-    );
     gh.factory<_i904.CheckoutRemoteDataSource>(() =>
         _i1066.CheckoutRemoteDataSourceImpl(gh<_i257.CheckoutApiService>()));
     gh.lazySingleton<_i456.Storage>(
@@ -337,16 +350,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i700.ProfileRemoteDataSource>(() =>
         _i1007.ProfileRemoteDataSourceImpl(
             profileApiService: gh<_i762.ProfileApiService>()));
-    gh.factory<_i281.TrackOrderRemoteDataSource>(() =>
-        _i706.TrackOrderRemoteDataSourceImpl(gh<_i557.RealTimeDataBaseService>(
-            instanceName: 'firebaseRealTimeDatabase')));
+    gh.lazySingleton<_i544.NetworkConnection>(() =>
+        _i544.NetworkConnectionImpl(gh<_i973.InternetConnectionChecker>()));
     gh.factory<_i341.CategoriesRemoteDataSource>(() =>
         _i98.CategoriesRemoteDataSourceImpl(
             apiServicest: gh<_i996.ApiServices>()));
     gh.factory<_i197.ProfileRepo>(() => _i387.ProfileRepoImpl(
         profileRemoteDataSource: gh<_i700.ProfileRemoteDataSource>()));
-    gh.factory<_i164.TrackOrderRepo>(
-        () => _i571.TrackOrderRepoImpl(gh<_i281.TrackOrderRemoteDataSource>()));
+    gh.factory<_i756.FirebaseService>(
+        () => _i756.FirebaseService(firestore: gh<_i974.FirebaseFirestore>()));
     gh.factory<_i691.CategoriesRepo>(() => _i1066.CategoriesRepoImpl(
         categoriesRemoteDataSource: gh<_i341.CategoriesRemoteDataSource>()));
     gh.factory<_i989.TermsAboutRepo>(() => _i857.TermsAboutRepoImpl(
@@ -363,8 +375,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i182.GetLoggedUserUseCase(gh<_i197.ProfileRepo>()));
     gh.factory<_i183.ProfileMainRepo>(() =>
         _i418.ProfileMainRepoImpl(gh<_i795.ProfileMainRemoteDataSource>()));
-    gh.factory<_i266.TrackOrderUseCase>(
-        () => _i266.TrackOrderUseCase(gh<_i164.TrackOrderRepo>()));
     gh.factory<_i755.OrdersRemoteDataSource>(
         () => _i694.OrdersRemoteDataSourceImpl(gh<_i88.OrdersApiService>()));
     gh.factory<_i806.BestSellerRemoteDataSource>(() =>
@@ -426,14 +436,17 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i868.GetLoggedUserUseCase>(
         () => _i868.GetLoggedUserUseCase(gh<_i183.ProfileMainRepo>()));
+    gh.factory<_i913.TrackOrderRemoteDataSource>(
+        () => _i779.TrackOrderRemoteDataSourceImp(
+              gh<_i206.TrackOrderApiService>(),
+              gh<_i756.FirebaseService>(),
+            ));
     gh.factory<_i262.CartRepo>(
         () => _i645.CartRepoImpl(gh<_i550.CartRemoteDataSource>()));
     gh.factory<_i167.ProductSearchUseCase>(
         () => _i167.ProductSearchUseCase(gh<_i886.SearchRepo>()));
     gh.factory<_i214.OrdersRepo>(
         () => _i855.OrdersRepoImpl(gh<_i755.OrdersRemoteDataSource>()));
-    gh.factory<_i891.TrackOrderViewModel>(
-        () => _i891.TrackOrderViewModel(gh<_i266.TrackOrderUseCase>()));
     gh.factory<_i451.AddAddressUseCase>(
         () => _i451.AddAddressUseCase(gh<_i718.AddressRepo>()));
     gh.factory<_i392.UpdateAddressUseCase>(
@@ -477,6 +490,10 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i57.OrdersUseCase>(
         () => _i57.OrdersUseCase(gh<_i214.OrdersRepo>()));
+    gh.factory<_i470.TrackOrderRepo>(() => _i1052.TrackOrderRepoImp(
+          gh<_i913.TrackOrderRemoteDataSource>(),
+          gh<_i973.InternetConnectionChecker>(),
+        ));
     gh.factory<_i889.ForgetPasswordViewModel>(
         () => _i889.ForgetPasswordViewModel(
               gh<_i568.ForgetPasswordUseCase>(),
@@ -516,6 +533,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i1.CreateCashOrderUseCase>(),
           gh<_i140.CreateVisaOrderUseCase>(),
         ));
+    gh.factory<_i560.GetOrderStreamUseCase>(
+        () => _i560.GetOrderStreamUseCase(gh<_i470.TrackOrderRepo>()));
+    gh.factory<_i169.GetVehicleByIdUseCase>(
+        () => _i169.GetVehicleByIdUseCase(gh<_i470.TrackOrderRepo>()));
+    gh.factory<_i97.UpdateOrderFirebaseUseCase>(
+        () => _i97.UpdateOrderFirebaseUseCase(gh<_i470.TrackOrderRepo>()));
     gh.factory<_i1055.GetUserCartUseCase>(
         () => _i1055.GetUserCartUseCase(gh<_i262.CartRepo>()));
     gh.factory<_i505.ProfileMainViewModel>(
@@ -542,6 +565,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i990.SignupViewModel(gh<_i630.SignUpUseCase>()));
     gh.factory<_i902.CheckUserLoggedInUseCase>(
         () => _i902.CheckUserLoggedInUseCase(gh<_i466.AuthRepo>()));
+    gh.factory<_i670.TrackOrderViewModel>(() => _i670.TrackOrderViewModel(
+          gh<_i169.GetVehicleByIdUseCase>(),
+          gh<_i560.GetOrderStreamUseCase>(),
+          gh<_i97.UpdateOrderFirebaseUseCase>(),
+        ));
     gh.factory<_i301.SigninViewModel>(() => _i301.SigninViewModel(
           gh<_i375.SigninUseCase>(),
           gh<_i902.CheckUserLoggedInUseCase>(),
@@ -551,3 +579,5 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$DioModule extends _i456.DioModule {}
+
+class _$ExternalModules extends _i649.ExternalModules {}

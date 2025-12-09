@@ -229,5 +229,22 @@ abstract class  LocaleKeys {
   static const  please_log_in_to_view_and_manage_your_profile = ' please_log_in_to_view_and_manage_your_profile';
   static const product_added_successfully = 'product_added_successfully';
   static const about_app = 'about_app';
+  static const track_order_title = 'track_order_title';
+  static const no_order_data_found = 'no_order_data_found';
+  static const orderReceived = 'orderReceived';
+  static const preparingOrder = 'preparingOrder';
+  static const outForDelivery = 'outForDelivery';
+  static const estimatedArrival = 'estimatedArrival';
+  static const confirmDelivery = 'confirmDelivery';
+  static const confirmDeliveryMessage = 'confirmDeliveryMessage';
+  static const showMap = 'showMap';
+  static const deliveryHeroForToday = 'deliveryHeroForToday';
+  static const callDriver = 'callDriver';
+  static const chatOnWhatsApp = 'chatOnWhatsApp';
+  static const wait_until_shipping = 'wait_until_shipping';
+  static const order_marked_as_delivered = 'order_marked_as_delivered';
+  static const updating = 'updating';
+  static const successfully = 'successfully';
+  static const your_oredr_placed = 'your_oredr_placed';
 
 }

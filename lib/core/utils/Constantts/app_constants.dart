@@ -35,4 +35,8 @@ abstract class AppConstants {
   static const String aboutUsJsonFilePath = 'assets/json/aboutus.json';
   static const String termsConditionsJsonFilePath =
       'assets/json/termsconditions.json';
+  static const String noInternet = 'No Internet Connection';
+  static const String orderNotFound = 'Order not found';
+  static const String driverLocationKey = 'driverLocation';
+  static const String aboutUsDateFormat = 'dd MMM yyyy';
 }

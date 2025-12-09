@@ -131,4 +131,8 @@ class Assets {
   static const String successLogo = 'assets/images/success_logo.svg';
   static const String signInLotti =
       'assets/animations/Login Character Animation (1).json';
+
+  static const String assetsImagesSucessLottie =
+      'assets/animations/success_lottie.json';
+  static const String assetsImagesPhoneIcon = 'assets/images/phone_icon.svg';
 }

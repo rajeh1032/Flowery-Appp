@@ -16,8 +16,6 @@ import 'package:flower_e_commerce_app/Feature/mainLayout/tabs/profile_main/prese
 import 'package:flower_e_commerce_app/Feature/productDetails/presentation/page/product_details_screen.dart';
 import 'package:flower_e_commerce_app/Feature/searchFeature/presentation/pages/search_screen.dart';
 import 'package:flower_e_commerce_app/Feature/termsFeature/presentation/view/terms_about_provider.dart';
-import 'package:flower_e_commerce_app/Feature/trackOrder/presentation/pages/map_screen.dart';
-import 'package:flower_e_commerce_app/Feature/trackOrder/presentation/pages/track_order_screen.dart';
 import 'package:flower_e_commerce_app/core/models/occasion_input_model.dart';
 import 'package:flower_e_commerce_app/core/models/product_details_model.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/app_routes.dart';
@@ -81,24 +79,24 @@ class RouteGenerator {
       case AppRoutes.aboutScreen:
         return MaterialPageRoute(
             builder: (_) => TermsAboutProvider.aboutScreen());
-      case AppRoutes.trackOrderRoute:
-        final orderId = settings.arguments as String;
-        return MaterialPageRoute(
-            builder: (_) => TrackOrderScreen(
-                  orderId: orderId,
-                ));
+      // case AppRoutes.trackOrderRoute:
+      //   final orderId = settings.arguments as String;
+      // return MaterialPageRoute(
+      //     builder: (_) => TrackOrderScreen(
+      //           orderId: orderId,
+      //         ));
       case AppRoutes.successOrderRoute:
         final orderId = settings.arguments as String;
         return MaterialPageRoute(
             builder: (_) => OrderSuccessScreen(
                   orderId: orderId,
                 ));
-      case AppRoutes.mapScreen:
-        final orderId = settings.arguments as String;
-        return MaterialPageRoute(
-            builder: (_) => MapScreen(
-                  orderId: orderId,
-                ));
+      // case AppRoutes.mapScreen:
+      //   final orderId = settings.arguments as String;
+      //   return MaterialPageRoute(
+      //       builder: (_) => MapScreen(
+      //             orderId: orderId,
+      //           ));
 
       default:
         return unDefinedRoute();
