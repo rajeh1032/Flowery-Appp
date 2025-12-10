@@ -35,4 +35,16 @@ abstract class AppConstants {
   static const String aboutUsJsonFilePath = 'assets/json/aboutus.json';
   static const String termsConditionsJsonFilePath =
       'assets/json/termsconditions.json';
+  static const String noInternet = 'No Internet Connection';
+  static const String orderNotFound = 'Order not found';
+  static const String driverLocationKey = 'driverLocation';
+  static const String aboutUsDateFormat = 'dd MMM yyyy';
+  static const String termsKey = 'terms_and_conditions';
+  static const String aboutUsKey = 'about_app';
+  static const String urlwatsApp = 'https://wa.me/';
+  static const String collectionKey = 'orders';
+  static const String urlTemplate =
+      'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  static const String userAgentPackageName = 'com.example.tracking_app';
+
 }

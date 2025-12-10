@@ -21,4 +21,5 @@ abstract class AppRoutes {
   static const String successOrderRoute = '/successPageRoute';
   static const String termsScreenRoute = '/termsScreen';
   static const String aboutScreen = '/aboutScreen';
+
 }

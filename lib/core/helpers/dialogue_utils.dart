@@ -55,4 +55,6 @@ abstract class DialogueUtils {
       },
     );
   }
+
+  static void showLoading({required BuildContext context, required message}) {}
 }

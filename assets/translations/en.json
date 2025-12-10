@@ -226,5 +226,23 @@
   " please_log_in_to_view_and_manage_your_profile": "Please log in to view and manage your profile.",
   "product_added_successfully": "Product added successfully",
   "about_app": "About app",
-  "terms_and_conditions": "Terms and conditions"
+  "apartment": "Apartment",
+  "track_order_title": "Track Order",
+  "no_order_data_found": "No order data found",
+  "orderReceived": "Order Received",
+  "preparingOrder": "Preparing Order",
+  "outForDelivery": "Out for Delivery",
+  "estimatedArrival": "Estimated Arrival",
+  "confirmDelivery": "Confirm Delivery",
+  "confirmDeliveryMessage": "Are you sure you have delivered this order?",
+  "showMap": "Show Map",
+  "deliveryHeroForToday": "is your delivery hero for today",
+  "callDriver": "Call driver",
+  "chatOnWhatsApp": "Chat on WhatsApp",
+  "wait_until_shipping": "Wait until shipping",
+  "order_marked_as_delivered": "Order marked as delivered",
+  "updating": "updating...",
+  "successfully": "Successfully",
+  "your_oredr_placed":"Your order placed successfully!"
+
 }

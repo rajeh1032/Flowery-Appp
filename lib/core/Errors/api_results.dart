@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 import 'failure.dart';
 
 sealed class ApiResult<T> {}
@@ -10,4 +12,17 @@ class ApiSuccessResult<T> extends ApiResult<T> {
 class ApiErrorResult<T> extends ApiResult<T> {
   final Failure failure;
   ApiErrorResult({required this.failure});
+}
+
+Future<ApiResult<T>> safeApiCall<T>(Future<T> Function() apiCall) async {
+  try {
+    final result = await apiCall();
+    return ApiSuccessResult<T>(data: result);
+  } on DioException catch (dioError) {
+    return ApiErrorResult<T>(
+      failure: ServerFailure.fromDioError(dioException: dioError),
+    );
+  } catch (error) {
+    return ApiErrorResult<T>(failure: Failure(errorMessage: error.toString()));
+  }
 }

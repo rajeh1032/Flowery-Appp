@@ -225,5 +225,21 @@
   " please_log_in_to_view_and_manage_your_profile": "يرجى تسجيل الدخول لاظهار وتحديث الملف الشخصي.",
   "product_added_successfully": "تمت اضافة المنتج بنجاح",
   "about_app": "حول التطبيق",
-  "terms_and_conditions": "الشروط والاحكام"
+  "track_order_title": "تتبع الطلب",
+  "no_order_data_found": "لم يتم العثور على بيانات الطلب",
+  "orderReceived": "تم استلام الطلب",
+  "preparingOrder": "يتم تجهيز الطلب",
+  "outForDelivery": "خرج للتوصيل",
+  "estimatedArrival": "موعد الوصول المتوقع",
+  "confirmDelivery": "تأكيد التسليم",
+  "confirmDeliveryMessage": "هل أنت متأكد أنك سلمت هذا الطلب؟",
+  "showMap": "عرض الخريطة",
+  "deliveryHeroForToday": "هو بطل التوصيل الخاص بك اليوم",
+  "callDriver": "اتصل بالسائق",
+  "chatOnWhatsApp": "تحدث عبر واتساب",
+  "wait_until_shipping": "انتظر حتى يتم الشحن",
+  "order_marked_as_delivered": "تم وضع علامة على الطلب كمُسلم",
+  "updating": "جارٍ التحديث...",
+  "successfully": "تم بنجاح",
+  "your_oredr_placed": "تم وضع طلبك بنجاح!"
 }

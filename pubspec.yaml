@@ -44,7 +44,6 @@ dependencies:
   timeline_tile: ^2.0.0
   url_launcher: ^6.3.2
   location: ^8.0.1
-  firebase_database: ^12.0.2
   http: ^1.2.1
   flutter_polyline_points: ^2.0.0
   flutter_dotenv: ^5.1.0
@@ -52,21 +51,32 @@ dependencies:
   webview_flutter: ^4.13.0
   fluttertoast: ^9.0.0
   lottie: ^3.3.2
+  cloud_firestore: ^6.1.0
+  internet_connection_checker: ^3.0.1
+  flutter_native_splash: ^2.4.7
+  flutter_map: ^7.0.0
+  latlong2: ^0.9.1
+  rxdart: ^0.28.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^5.0.0
   build_runner: ^2.7.0
   test: ^1.25.15
   json_serializable: ^6.10.0
-
   retrofit_generator: ^10.0.4
-
   injectable_generator: ^2.8.1
-
   mockito: ^5.5.0
+  flutter_launcher_icons: "^0.14.4"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/app_icon.png"
+
+
 
 flutter:
   uses-material-design: true

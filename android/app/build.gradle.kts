@@ -1,19 +1,23 @@
 plugins {
     id("com.android.application")
-    // START: FlutterFire Configuration
     id("com.google.gms.google-services")
-    // END: FlutterFire Configuration
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
-import java.util.Properties
 
-val dotenvFile = rootProject.file(".env")
+import java.util.Properties
+import java.io.FileInputStream
+import java.io.File
+
+// Correct path to .env file in Flutter root directory
+// android/app/build.gradle.kts -> android/app -> android -> project_root
+val dotenvFile = File(rootProject.projectDir.parent, ".env")
 val env = Properties()
+
 if (dotenvFile.exists()) {
-    dotenvFile.inputStream().use { env.load(it) }
+    env.load(FileInputStream(dotenvFile))
 }
+
 android {
     namespace = "com.example.flower_e_commerce_app"
     compileSdk = flutter.compileSdkVersion
@@ -29,15 +33,28 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.flower_e_commerce_app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion                                                                          
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-manifestPlaceholders.put("GOOGLE_MAPS_API_KEY", env.getProperty("GOOGLE_MAPS_API_KEY") ?: "")
+
+        // Load Google Maps API Key from .env
+        val mapsApiKey = env.getProperty("GOOGLE_MAPS_API_KEY") ?: ""
+        manifestPlaceholders["GOOGLE_MAPS_API_KEY"] = mapsApiKey
+    }
+
+    flavorDimensions += "default"
+    productFlavors {
+        create("development") {
+            dimension = "default"
+            applicationIdSuffix = ".dev"
+            resValue("string", "app_name", "Flowery Development")
+        }
+        create("production") {
+            dimension = "default"
+            resValue("string", "app_name", "Flowery Production")
+        }
     }
 
     buildTypes {
