@@ -3,10 +3,12 @@ import 'package:flower_e_commerce_app/Feature/trackOrder/presentaion/page/track_
 import 'package:flower_e_commerce_app/Feature/trackOrder/presentaion/view_model/track_order_cubit.dart';
 import 'package:flower_e_commerce_app/Feature/trackOrder/presentaion/view_model/track_order_state.dart';
 import 'package:flower_e_commerce_app/core/Config/Theme/app_colors.dart';
+import 'package:flower_e_commerce_app/core/Widgets/custom_app_bar.dart';
 import 'package:flower_e_commerce_app/core/helpers/routing_extensions.dart';
 import 'package:flower_e_commerce_app/core/localization/locale_keys.g.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/app_assets.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/app_routes.dart';
+import 'package:flower_e_commerce_app/core/utils/Constantts/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +20,12 @@ class SuccessScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leadingWidth: AppSizes.appBarLeadingWidth,
+        leading: CustomBackButton(
+          title: "Success Screen",
+        ),
+      ),
       backgroundColor: AppColorsLight.white,
       body: Padding(
         padding: const EdgeInsets.all(10),

@@ -182,6 +182,16 @@ import '../../Feature/mainLayout/tabs/profile_main/domain/useCases/get_logged_us
     as _i868;
 import '../../Feature/mainLayout/tabs/profile_main/presentation/viewModels/profileViewModel/profile_main_view_model.dart'
     as _i505;
+import '../../Feature/map/data/repo_imp/tracking_repo_imp.dart' as _i666;
+import '../../Feature/map/data/sources/tracking_ds.dart' as _i813;
+import '../../Feature/map/data/sources/tracking_ds_imp.dart' as _i798;
+import '../../Feature/map/domain/repo/tracking_repo.dart' as _i401;
+import '../../Feature/map/domain/use%20case/call_driver_use_case.dart' as _i898;
+import '../../Feature/map/domain/use%20case/get_data_use_case.dart' as _i929;
+import '../../Feature/map/domain/use%20case/tracking_driver_use_case.dart'
+    as _i372;
+import '../../Feature/map/domain/use%20case/wats_app_use_case.dart' as _i65;
+import '../../Feature/map/presentation/view_model/tracking_bloc.dart' as _i259;
 import '../../Feature/occasion/api/client/occasion_api_service.dart' as _i713;
 import '../../Feature/occasion/api/dataSources/occasion_remote_data_source_impl.dart'
     as _i108;
@@ -241,18 +251,6 @@ import '../../Feature/termsFeature/presentation/widgets/about_screen.dart'
     as _i751;
 import '../../Feature/termsFeature/presentation/widgets/terms_screen.dart'
     as _i269;
-import '../../Feature/trackMap/api/client/track_map_api_service.dart' as _i345;
-import '../../Feature/trackMap/api/datasources/track_map_remote_data_source_impl.dart'
-    as _i642;
-import '../../Feature/trackMap/data/dataSources/track_map_remote_data_source.dart'
-    as _i73;
-import '../../Feature/trackMap/data/repositories/track_map_repo_impl.dart'
-    as _i795;
-import '../../Feature/trackMap/domain/repositories/track_map_repo.dart'
-    as _i155;
-import '../../Feature/trackMap/domain/useCases/get_route_use_case.dart' as _i53;
-import '../../Feature/trackMap/presentation/viewModel/track_map_view_model.dart'
-    as _i406;
 import '../../Feature/trackOrder/api/client/track_order_api_service.dart'
     as _i206;
 import '../../Feature/trackOrder/data/data_source/track_order_remote_ds.dart'
@@ -328,8 +326,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i88.OrdersApiService.new(gh<_i361.Dio>()));
     gh.factory<_i104.SearchApiService>(
         () => _i104.SearchApiService.new(gh<_i361.Dio>()));
-    gh.factory<_i345.TrackMapApiService>(
-        () => _i345.TrackMapApiService.new(gh<_i361.Dio>()));
     gh.factory<_i206.TrackOrderApiService>(
         () => _i206.TrackOrderApiService.new(gh<_i361.Dio>()));
     gh.factory<_i115.AddressRemoteDataSource>(() =>
@@ -345,8 +341,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i927.SecureStorageImpl(),
       instanceName: 'secureStorage',
     );
-    gh.factory<_i73.TrackMapRemoteDataSource>(() =>
-        _i642.TrackMapRemoteDataSourceImpl(gh<_i345.TrackMapApiService>()));
     gh.factory<_i700.ProfileRemoteDataSource>(() =>
         _i1007.ProfileRemoteDataSourceImpl(
             profileApiService: gh<_i762.ProfileApiService>()));
@@ -410,16 +404,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i49.GetAllOccasionUseCase(gh<_i215.OccasionRepo>()));
     gh.factory<_i89.GetProductsByOccasionUseCase>(
         () => _i89.GetProductsByOccasionUseCase(gh<_i215.OccasionRepo>()));
+    gh.factory<_i813.TrackingDataSource>(
+        () => _i798.TrackingDataSourceImp(gh<_i756.FirebaseService>()));
     gh.factory<_i550.CartRemoteDataSource>(
         () => _i790.CartRemoteDataSourceImpl(gh<_i115.CartApiService>()));
-    gh.factory<_i155.TrackMapRepo>(
-        () => _i795.TrackMapRepoImpl(gh<_i73.TrackMapRemoteDataSource>()));
     gh.factory<_i36.GetAboutUseCase>(
         () => _i36.GetAboutUseCase(repository: gh<_i989.TermsAboutRepo>()));
     gh.factory<_i190.GetTermsUseCase>(
         () => _i190.GetTermsUseCase(repository: gh<_i989.TermsAboutRepo>()));
-    gh.factory<_i53.GetRouteUseCase>(
-        () => _i53.GetRouteUseCase(gh<_i155.TrackMapRepo>()));
     gh.factory<_i179.DeleteAddressUseCase>(
         () => _i179.DeleteAddressUseCase(addressRepo: gh<_i718.AddressRepo>()));
     gh.factory<_i1008.GetAddressesUseCase>(
@@ -473,6 +465,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i378.GetCitiesUseCase(repository: gh<_i718.AddressRepo>()));
     gh.factory<_i483.GetGovernoratesUseCase>(() =>
         _i483.GetGovernoratesUseCase(repository: gh<_i718.AddressRepo>()));
+    gh.factory<_i401.TrackingRepo>(
+        () => _i666.TrackingRepoImp(gh<_i813.TrackingDataSource>()));
     gh.factory<_i568.ForgetPasswordUseCase>(
         () => _i568.ForgetPasswordUseCase(gh<_i466.AuthRepo>()));
     gh.factory<_i714.LogoutUseCase>(
@@ -481,8 +475,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i576.ResetPasswordUseCase(gh<_i466.AuthRepo>()));
     gh.factory<_i136.VerifyResetCodeUseCase>(
         () => _i136.VerifyResetCodeUseCase(gh<_i466.AuthRepo>()));
-    gh.factory<_i406.TrackMapViewModel>(
-        () => _i406.TrackMapViewModel(gh<_i53.GetRouteUseCase>()));
     gh.factory<_i347.OccasionViewModel>(() => _i347.OccasionViewModel(
           gh<_i49.GetAllOccasionUseCase>(),
           gh<_i89.GetProductsByOccasionUseCase>(),
@@ -570,9 +562,23 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i560.GetOrderStreamUseCase>(),
           gh<_i97.UpdateOrderFirebaseUseCase>(),
         ));
+    gh.factory<_i898.CallDriverUseCase>(
+        () => _i898.CallDriverUseCase(gh<_i401.TrackingRepo>()));
+    gh.factory<_i929.GetDataUseCase>(
+        () => _i929.GetDataUseCase(gh<_i401.TrackingRepo>()));
+    gh.factory<_i372.TrackingDriverUseCase>(
+        () => _i372.TrackingDriverUseCase(gh<_i401.TrackingRepo>()));
+    gh.factory<_i65.WatsappUseCase>(
+        () => _i65.WatsappUseCase(gh<_i401.TrackingRepo>()));
     gh.factory<_i301.SigninViewModel>(() => _i301.SigninViewModel(
           gh<_i375.SigninUseCase>(),
           gh<_i902.CheckUserLoggedInUseCase>(),
+        ));
+    gh.factory<_i259.TrackingViewModel>(() => _i259.TrackingViewModel(
+          gh<_i929.GetDataUseCase>(),
+          gh<_i372.TrackingDriverUseCase>(),
+          gh<_i898.CallDriverUseCase>(),
+          gh<_i65.WatsappUseCase>(),
         ));
     return this;
   }

@@ -28,7 +28,8 @@ class FirebaseRemoteExecutor implements RemoteExecutor {
       final mappedResult = mapper(response);
       return ApiSuccessResult<TResult>(data: mappedResult);
     } on FirebaseException catch (e) {
-      return ApiErrorResult<TResult>(failure: FirebaseFailure.fromException(e));
+      return ApiErrorResult<TResult>(
+          failure: ServerFailure.fromFirebaseError(exception: e));
     } catch (e) {
       return ApiErrorResult<TResult>(
         failure: Failure(errorMessage: e.toString()),

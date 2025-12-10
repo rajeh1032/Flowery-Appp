@@ -133,6 +133,8 @@ class Assets {
       'assets/animations/Login Character Animation (1).json';
 
   static const String assetsImagesSucessLottie =
-      'assets/animations/success_lottie.json';
+      'assets/images/sucess_lottie.json';
   static const String assetsImagesPhoneIcon = 'assets/images/phone_icon.svg';
+  static const String flowerPhoto = 'assets/images/flower_photo.svg';
+  static const String logoBoy = 'assets/images/DeliveryBoy.png';
 }

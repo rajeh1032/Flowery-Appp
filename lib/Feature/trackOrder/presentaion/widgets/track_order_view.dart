@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flower_e_commerce_app/Feature/map/presentation/pages/maps_screen.dart';
 import 'package:flower_e_commerce_app/Feature/trackOrder/presentaion/models/tracking_step.dart';
 import 'package:flower_e_commerce_app/Feature/trackOrder/presentaion/view_model/track_order_cubit.dart';
 import 'package:flower_e_commerce_app/Feature/trackOrder/presentaion/view_model/track_order_event.dart';
@@ -207,13 +208,13 @@ class TrackOrderView extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               // todo: show map
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) =>
-              //         DriverMapPage(orderId: state.orderEntity?.id ?? ""),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      DriverMapPage(orderId: state.orderEntity?.id ?? ""),
+                ),
+              );
             },
             child: Text(
               LocaleKeys.show_map.tr(),

@@ -41,4 +41,5 @@ abstract class ApiConstants {
   static const String orderCollection = "orders";
   static const String userState = "userState";
   static const String vehicles = "vehicles/{vehicleId}";
+
 }
