@@ -302,32 +302,32 @@ extension GetItInjectableX on _i174.GetIt {
         () => externalModules.provideFirebaseFirestore());
     gh.factory<_i436.AddressLocalDataSource>(
         () => _i932.AddressLocalDataSourceImpl());
-    gh.factory<_i751.AboutScreen>(
-        () => _i751.AboutScreen(key: gh<_i409.Key>()));
     gh.factory<_i269.TermsScreen>(
         () => _i269.TermsScreen(key: gh<_i409.Key>()));
-    gh.factory<_i304.AddressApiServices>(
-        () => _i304.AddressApiServices.new(gh<_i361.Dio>()));
-    gh.factory<_i500.ApiServices>(() => _i500.ApiServices.new(gh<_i361.Dio>()));
-    gh.factory<_i35.MostSellingApiService>(
-        () => _i35.MostSellingApiService.new(gh<_i361.Dio>()));
-    gh.factory<_i257.CheckoutApiService>(
-        () => _i257.CheckoutApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i751.AboutScreen>(
+        () => _i751.AboutScreen(key: gh<_i409.Key>()));
     gh.factory<_i762.ProfileApiService>(
         () => _i762.ProfileApiService.new(gh<_i361.Dio>()));
-    gh.factory<_i115.CartApiService>(
-        () => _i115.CartApiService.new(gh<_i361.Dio>()));
-    gh.factory<_i996.ApiServices>(() => _i996.ApiServices.new(gh<_i361.Dio>()));
-    gh.factory<_i542.ProfileApiService>(
-        () => _i542.ProfileApiService.new(gh<_i361.Dio>()));
-    gh.factory<_i713.OccasionApiService>(
-        () => _i713.OccasionApiService.new(gh<_i361.Dio>()));
-    gh.factory<_i88.OrdersApiService>(
-        () => _i88.OrdersApiService.new(gh<_i361.Dio>()));
-    gh.factory<_i104.SearchApiService>(
-        () => _i104.SearchApiService.new(gh<_i361.Dio>()));
     gh.factory<_i206.TrackOrderApiService>(
         () => _i206.TrackOrderApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i500.ApiServices>(() => _i500.ApiServices.new(gh<_i361.Dio>()));
+    gh.factory<_i104.SearchApiService>(
+        () => _i104.SearchApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i304.AddressApiServices>(
+        () => _i304.AddressApiServices.new(gh<_i361.Dio>()));
+    gh.factory<_i257.CheckoutApiService>(
+        () => _i257.CheckoutApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i35.MostSellingApiService>(
+        () => _i35.MostSellingApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i88.OrdersApiService>(
+        () => _i88.OrdersApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i713.OccasionApiService>(
+        () => _i713.OccasionApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i115.CartApiService>(
+        () => _i115.CartApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i542.ProfileApiService>(
+        () => _i542.ProfileApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i996.ApiServices>(() => _i996.ApiServices.new(gh<_i361.Dio>()));
     gh.factory<_i115.AddressRemoteDataSource>(() =>
         _i824.AddressRemoteDataSourceImpl(
             apiServicest: gh<_i304.AddressApiServices>()));
@@ -376,15 +376,15 @@ extension GetItInjectableX on _i174.GetIt {
             apiServices: gh<_i35.MostSellingApiService>()));
     gh.factory<_i901.AuthLocalDataSource>(() => _i608.AuthLocalDataSourceImpl(
         gh<_i456.Storage>(instanceName: 'secureStorage')));
-    gh.factory<_i66.CategoriesUseCase>(() =>
-        _i66.CategoriesUseCase(categoriesRepo: gh<_i691.CategoriesRepo>()));
     gh.factory<_i201.GetAllProductsUseCase>(() => _i201.GetAllProductsUseCase(
         categoriesRepo: gh<_i691.CategoriesRepo>()));
-    gh.factory<_i214.GetCategoryProductsUseCase>(() =>
-        _i214.GetCategoryProductsUseCase(
-            categoriesRepo: gh<_i691.CategoriesRepo>()));
+    gh.factory<_i66.CategoriesUseCase>(() =>
+        _i66.CategoriesUseCase(categoriesRepo: gh<_i691.CategoriesRepo>()));
     gh.factory<_i137.GetProductsByCategoryUseCase>(() =>
         _i137.GetProductsByCategoryUseCase(
+            categoriesRepo: gh<_i691.CategoriesRepo>()));
+    gh.factory<_i214.GetCategoryProductsUseCase>(() =>
+        _i214.GetCategoryProductsUseCase(
             categoriesRepo: gh<_i691.CategoriesRepo>()));
     gh.factory<_i516.BestSellerRepo>(() => _i983.BestSellerRepoImpl(
         dataSource: gh<_i806.BestSellerRemoteDataSource>()));
@@ -398,28 +398,28 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i127.BestSellerUseCase>(
         () => _i127.BestSellerUseCase(repo: gh<_i516.BestSellerRepo>()));
-    gh.factory<_i781.AddProductToCartUseCase>(
-        () => _i781.AddProductToCartUseCase(gh<_i215.OccasionRepo>()));
     gh.factory<_i49.GetAllOccasionUseCase>(
         () => _i49.GetAllOccasionUseCase(gh<_i215.OccasionRepo>()));
+    gh.factory<_i781.AddProductToCartUseCase>(
+        () => _i781.AddProductToCartUseCase(gh<_i215.OccasionRepo>()));
     gh.factory<_i89.GetProductsByOccasionUseCase>(
         () => _i89.GetProductsByOccasionUseCase(gh<_i215.OccasionRepo>()));
     gh.factory<_i813.TrackingDataSource>(
         () => _i798.TrackingDataSourceImp(gh<_i756.FirebaseService>()));
     gh.factory<_i550.CartRemoteDataSource>(
         () => _i790.CartRemoteDataSourceImpl(gh<_i115.CartApiService>()));
-    gh.factory<_i36.GetAboutUseCase>(
-        () => _i36.GetAboutUseCase(repository: gh<_i989.TermsAboutRepo>()));
     gh.factory<_i190.GetTermsUseCase>(
         () => _i190.GetTermsUseCase(repository: gh<_i989.TermsAboutRepo>()));
-    gh.factory<_i179.DeleteAddressUseCase>(
-        () => _i179.DeleteAddressUseCase(addressRepo: gh<_i718.AddressRepo>()));
+    gh.factory<_i36.GetAboutUseCase>(
+        () => _i36.GetAboutUseCase(repository: gh<_i989.TermsAboutRepo>()));
     gh.factory<_i1008.GetAddressesUseCase>(
         () => _i1008.GetAddressesUseCase(addressRepo: gh<_i718.AddressRepo>()));
-    gh.factory<_i983.EditProfileUseCase>(
-        () => _i983.EditProfileUseCase(profileRepo: gh<_i197.ProfileRepo>()));
+    gh.factory<_i179.DeleteAddressUseCase>(
+        () => _i179.DeleteAddressUseCase(addressRepo: gh<_i718.AddressRepo>()));
     gh.factory<_i463.UploadPhotoUseCase>(
         () => _i463.UploadPhotoUseCase(profileRepo: gh<_i197.ProfileRepo>()));
+    gh.factory<_i983.EditProfileUseCase>(
+        () => _i983.EditProfileUseCase(profileRepo: gh<_i197.ProfileRepo>()));
     gh.factory<_i713.AppConfigCubit>(() =>
         _i713.AppConfigCubit(gh<_i456.Storage>(instanceName: 'secureStorage')));
     gh.factory<_i53.BestSellerViewModel>(() => _i53.BestSellerViewModel(
@@ -439,16 +439,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i167.ProductSearchUseCase(gh<_i886.SearchRepo>()));
     gh.factory<_i214.OrdersRepo>(
         () => _i855.OrdersRepoImpl(gh<_i755.OrdersRemoteDataSource>()));
-    gh.factory<_i451.AddAddressUseCase>(
-        () => _i451.AddAddressUseCase(gh<_i718.AddressRepo>()));
     gh.factory<_i392.UpdateAddressUseCase>(
         () => _i392.UpdateAddressUseCase(gh<_i718.AddressRepo>()));
+    gh.factory<_i451.AddAddressUseCase>(
+        () => _i451.AddAddressUseCase(gh<_i718.AddressRepo>()));
     gh.factory<_i1.CreateCashOrderUseCase>(
         () => _i1.CreateCashOrderUseCase(gh<_i46.CheckoutRepo>()));
-    gh.factory<_i140.CreateVisaOrderUseCase>(
-        () => _i140.CreateVisaOrderUseCase(gh<_i46.CheckoutRepo>()));
     gh.factory<_i87.GetUserAddressUseCase>(
         () => _i87.GetUserAddressUseCase(gh<_i46.CheckoutRepo>()));
+    gh.factory<_i140.CreateVisaOrderUseCase>(
+        () => _i140.CreateVisaOrderUseCase(gh<_i46.CheckoutRepo>()));
     gh.factory<_i466.AuthRepo>(() => _i923.AuthRepoImpl(
           gh<_i896.AuthRemoteDataSource>(),
           gh<_i901.AuthLocalDataSource>(),
@@ -461,20 +461,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i359.GetCitiesByGovernorateUseCase>(() =>
         _i359.GetCitiesByGovernorateUseCase(
             repository: gh<_i718.AddressRepo>()));
-    gh.factory<_i378.GetCitiesUseCase>(
-        () => _i378.GetCitiesUseCase(repository: gh<_i718.AddressRepo>()));
     gh.factory<_i483.GetGovernoratesUseCase>(() =>
         _i483.GetGovernoratesUseCase(repository: gh<_i718.AddressRepo>()));
+    gh.factory<_i378.GetCitiesUseCase>(
+        () => _i378.GetCitiesUseCase(repository: gh<_i718.AddressRepo>()));
     gh.factory<_i401.TrackingRepo>(
         () => _i666.TrackingRepoImp(gh<_i813.TrackingDataSource>()));
-    gh.factory<_i568.ForgetPasswordUseCase>(
-        () => _i568.ForgetPasswordUseCase(gh<_i466.AuthRepo>()));
     gh.factory<_i714.LogoutUseCase>(
         () => _i714.LogoutUseCase(gh<_i466.AuthRepo>()));
-    gh.factory<_i576.ResetPasswordUseCase>(
-        () => _i576.ResetPasswordUseCase(gh<_i466.AuthRepo>()));
     gh.factory<_i136.VerifyResetCodeUseCase>(
         () => _i136.VerifyResetCodeUseCase(gh<_i466.AuthRepo>()));
+    gh.factory<_i568.ForgetPasswordUseCase>(
+        () => _i568.ForgetPasswordUseCase(gh<_i466.AuthRepo>()));
+    gh.factory<_i576.ResetPasswordUseCase>(
+        () => _i576.ResetPasswordUseCase(gh<_i466.AuthRepo>()));
     gh.factory<_i347.OccasionViewModel>(() => _i347.OccasionViewModel(
           gh<_i49.GetAllOccasionUseCase>(),
           gh<_i89.GetProductsByOccasionUseCase>(),
@@ -535,12 +535,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1055.GetUserCartUseCase(gh<_i262.CartRepo>()));
     gh.factory<_i505.ProfileMainViewModel>(
         () => _i505.ProfileMainViewModel(gh<_i868.GetLoggedUserUseCase>()));
+    gh.factory<_i922.UpdateCartProductQuantityUseCase>(
+        () => _i922.UpdateCartProductQuantityUseCase(gh<_i262.CartRepo>()));
     gh.factory<_i966.ClearSpecificCartItemUseCase>(
         () => _i966.ClearSpecificCartItemUseCase(gh<_i262.CartRepo>()));
     gh.factory<_i811.ClearUserCartUseCase>(
         () => _i811.ClearUserCartUseCase(gh<_i262.CartRepo>()));
-    gh.factory<_i922.UpdateCartProductQuantityUseCase>(
-        () => _i922.UpdateCartProductQuantityUseCase(gh<_i262.CartRepo>()));
     gh.factory<_i64.OrdersViewModel>(
         () => _i64.OrdersViewModel(gh<_i57.OrdersUseCase>()));
     gh.factory<_i670.SearchViewModel>(
@@ -562,12 +562,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i560.GetOrderStreamUseCase>(),
           gh<_i97.UpdateOrderFirebaseUseCase>(),
         ));
-    gh.factory<_i898.CallDriverUseCase>(
-        () => _i898.CallDriverUseCase(gh<_i401.TrackingRepo>()));
     gh.factory<_i929.GetDataUseCase>(
         () => _i929.GetDataUseCase(gh<_i401.TrackingRepo>()));
     gh.factory<_i372.TrackingDriverUseCase>(
         () => _i372.TrackingDriverUseCase(gh<_i401.TrackingRepo>()));
+    gh.factory<_i898.CallDriverUseCase>(
+        () => _i898.CallDriverUseCase(gh<_i401.TrackingRepo>()));
     gh.factory<_i65.WatsappUseCase>(
         () => _i65.WatsappUseCase(gh<_i401.TrackingRepo>()));
     gh.factory<_i301.SigninViewModel>(() => _i301.SigninViewModel(

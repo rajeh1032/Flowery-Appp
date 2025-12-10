@@ -10,7 +10,6 @@ import 'package:flower_e_commerce_app/Feature/auth/presentation/pages/sign_in_sc
 import 'package:flower_e_commerce_app/Feature/auth/presentation/pages/sign_up_screen.dart';
 import 'package:flower_e_commerce_app/Feature/mainLayout/main_layout.dart';
 import 'package:flower_e_commerce_app/Feature/mainLayout/tabs/categoriesFeature/presentation/pages/category_screen.dart';
-import 'package:flower_e_commerce_app/Feature/orderSuccess/presentation/order_success_page.dart';
 import 'package:flower_e_commerce_app/Feature/ordersPage/presentation/pages/orders_screen.dart';
 import 'package:flower_e_commerce_app/Feature/mainLayout/tabs/profile_main/presentation/pages/profile_screen.dart';
 import 'package:flower_e_commerce_app/Feature/productDetails/presentation/page/product_details_screen.dart';
@@ -80,18 +79,6 @@ class RouteGenerator {
       case AppRoutes.aboutScreen:
         return MaterialPageRoute(
             builder: (_) => TermsAboutProvider.aboutScreen());
-      case AppRoutes.successOrderRoute:
-        final orderId = settings.arguments as String;
-        return MaterialPageRoute(
-            builder: (_) => OrderSuccessScreen(
-                  orderId: orderId,
-                ));
-      // case AppRoutes.trackOrderRoute:
-      //   final orderId = settings.arguments as String;
-      //   return MaterialPageRoute(
-      //       builder: (_) => TrackOrderScreen(
-      //             orderId: orderId,
-      //           ));
 
       default:
         return unDefinedRoute();
