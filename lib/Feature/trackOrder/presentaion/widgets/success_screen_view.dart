@@ -67,7 +67,7 @@ class SuccessScreenView extends StatelessWidget {
                       );
                     } else {
                       context.pushNamedAndRemoveUntil(
-                        AppRoutes.ordersRoute,
+                        AppRoutes.mainLayoutRoute,
                         predicate: (_) => false,
                       );
                     }

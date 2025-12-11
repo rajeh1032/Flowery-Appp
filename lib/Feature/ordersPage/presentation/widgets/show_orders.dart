@@ -19,8 +19,11 @@ class ShowOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomBackButton(
-        title: LocaleKeys.my_orders.tr(),
+      appBar: AppBar(
+        leadingWidth: AppSizes.appBarLeadingWidth,
+        leading: CustomBackButton(
+          title: LocaleKeys.my_orders.tr(),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

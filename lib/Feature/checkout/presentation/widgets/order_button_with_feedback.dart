@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flower_e_commerce_app/Feature/checkout/presentation/widgets/visa_payment_web_view.dart';
+import 'package:flower_e_commerce_app/Feature/trackOrder/presentaion/page/success_screen.dart';
 import 'package:flower_e_commerce_app/core/helpers/routing_extensions.dart';
 import 'package:flower_e_commerce_app/core/utils/Constantts/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,13 @@ class OrderButtonWithFeedback extends StatelessWidget {
             posActionName: LocaleKeys.ok.tr(),
             message: LocaleKeys.cashOrderSuccessMessage.tr(),
             posAction: () {
-              context.pushReplacementNamed(AppRoutes.successOrderRoute,
-                  arguments: state.cashOrderResponse!.orderId);
+              final orderId = state.cashOrderResponse!.orderId;
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PaymentSuccessScreen(orderId: orderId),
+                ),
+              );
             },
           );
         } else if (!state.isVisaOrderLoading &&
